@@ -1,1 +1,1 @@
-web: node ./bin/www
+web: sudo node ./bin/www
