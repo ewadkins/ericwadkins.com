@@ -74,7 +74,7 @@ function startServer(db) {
    * Get port from environment and store in Express.
    */
   
-  port = config.server.port
+  port = process.env.PORT || config.server.port
   app.set('port', port);
   
   /**
