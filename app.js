@@ -1,5 +1,6 @@
 var config = require('./config');
 var express = require('express');
+var oauthServer = require('oauth2-server');
 var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
@@ -9,12 +10,9 @@ var fs = require('fs');
 
 function create(db) {
 
-	var app = express();
+	app = express();
 
-	// view engine setup
-	app.set('views', path.join(__dirname, 'views'));
-	app.set('view engine', 'jade');
-
+	// Configure logging
 	var winston = require('winston');
 	var morgan = require('morgan');
 	var logDirectory = path.join('./', config.server.logDirectory);
@@ -46,47 +44,79 @@ function create(db) {
 	};
 	app.use(morgan('dev', { stream: logger.stream }));
 
-	// uncomment after placing your favicon in /public
+	// Uncomment after placing your favicon in /public
 	//app.use(favicon(path.join(__dirname, 'public/images/favicon.ico')));
 	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(busboy());
 	app.use(cookieParser());
-	
-    app.use(express.static(path.join(__dirname, config.server.publicDirectory)));
 
-	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db));
+	// Add document management functions
+	if (db) {
+		db.documents = require('./documents')(db, logger);	
+	}
     
-	// catch 404 and forward to error handler
+    // Add document builder (works with query or request body)
+    app.buildDocument = require('./buildDocument')
+
+	// Setup oauth model
+	/*app.oauth = oauthServer({
+		model: require('./oauth-model')(db, logger),
+		grants: ['password'],
+		debug: true
+	});*/
+	
+	// Log ips
+	app.use(function(req, res, next) {
+		logger.info(req.ip);
+		if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
+			logger.info('Body:');
+			logger.info(req.body);		
+		}
+		next();
+	});
+
+	// Handle token grant requests
+	/*app.all('/oauth/token', app.oauth.grant());
+	
+	app.oauth.weakAuthentication = function() {
+		return function(req, res, next) {
+			var body = db.buildDocument(req.body, { clientId: 'string', clientSecret: 'string' });
+			if (body.clientId && body.clientSecret && body.clientId === config.appClientId && body.clientSecret === config.appClientSecret) {
+				return next();
+			}
+			res.json({ error: 'Authentication failed' });
+		}
+	}*/
+
+	// Configure paths
+	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db, logger));
+	app.use('/api/wiki', require(path.join(__dirname, config.server.routesDirectory, 'api/wiki'))(db, logger));
+
+	app.use(express.static(path.join(__dirname, config.server.publicDirectory)));
+	
+	/*app.get('/test', app.oauth.weakAuthentication(), function(req, res) {
+		res.send('Success');
+	});*/
+	
+	// Catch 404 and forward to error handler
 	app.use(function(req, res, next) {
 	  var err = new Error('Not Found');
 	  err.status = 404;
 	  next(err);
 	});
 
-	// error handlers
     app.use(function(err, req, res, next) {
     	if (!err.status) {
     		logger.error(err);
     		throw err;
     	}
-        if (app.get('env') === 'development') {
-            res.status(err.status || 500);
-            res.render('error', {
-                       message: err.message,
-                       error: err
-                       });
-        }
-        else {
-            res.status(err.status || 500);
-            res.render('error', {
-                       message: err.message,
-                       error: {}
-                       });
-        }
+    	res.status(err.status || 500);
+    	res.send('<b>' + err.status + ':</b> ' + err.message);
     });
     
 	return [app, logger];
+
 }
 
 module.exports = create;

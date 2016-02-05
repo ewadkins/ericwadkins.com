@@ -3,17 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodejs ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "body-parser": "^1.14.0",
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.2",
     "connect-busboy": "0.0.2",
-    "cookie-parser": "^1.3.5",
+    "cookie-parser": "^1.4.1",
     "express": "^4.13.3",
-    "jade": "^1.11.0",
-    "mongodb": "^2.0.43",
+    "mongodb": "^2.1.4",
     "morgan": "^1.6.1",
+    "oauth2-server": "^2.4.1",
     "serve-favicon": "^2.3.0",
-    "winston": "^1.0.1"
+    "winston": "^2.1.1"
   }
 }
