@@ -2,7 +2,7 @@ var fs = require('fs')
 
 var config = {
 		server: {
-			port: 80,
+			port: 8080,
 			useHttps: false,
 			https: {
 				keyPath: '',
