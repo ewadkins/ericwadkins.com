@@ -1,3 +1,5 @@
+var fs = require('fs')
+
 var config = {
 		server: {
 			port: 80,
@@ -13,15 +15,15 @@ var config = {
 			index: 'index.html'
 		},    
 		db: {
-			hostname: 'localhost',
-	        port: 27017,
-	        mainDb: 'iou',
+			hostname: 'ds059165.mongolab.com',
+	        port: 59165,
+	        mainDb: 'heroku_h5zdpd40',
 	        useSSL: false,
 	        required: true,
-	        authenticate: false,
+	        authenticate: true,
 	        authentication: {
-	            username: '',
-	            password: ''
+	            username: 'admin',
+	            password: fs.readFileSync('password.txt').toString()
 	        },
 	        collections: {
 	        	users: 'users',
