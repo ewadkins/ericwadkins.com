@@ -23,7 +23,7 @@ var config = {
 	        authenticate: true,
 	        authentication: {
 	            username: 'admin',
-	            password: fs.readFileSync('password.txt').toString()
+	            password: 'd0gd4ys'
 	        },
 	        collections: {
 	        	users: 'users',
