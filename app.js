@@ -57,7 +57,10 @@ function create(db) {
 	}
     
     // Add document builder (works with query or request body)
-    app.buildDocument = require('./buildDocument')
+    app.buildDocument = require('./buildDocument');
+    
+    // Add mail functionality (from noreply8345@gmail.com)
+    app.mail = require('./mail');
 
 	// Setup oauth model
 	/*app.oauth = oauthServer({
@@ -91,6 +94,7 @@ function create(db) {
 
 	// Configure paths
 	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db, logger));
+	app.use('/mail', require(path.join(__dirname, config.server.routesDirectory, 'mail'))(db, logger));
 	app.use('/api/wiki', require(path.join(__dirname, config.server.routesDirectory, 'api/wiki'))(db, logger));
 
 	app.use(express.static(path.join(__dirname, config.server.publicDirectory)));

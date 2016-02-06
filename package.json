@@ -13,6 +13,7 @@
     "express": "^4.13.3",
     "mongodb": "^2.1.4",
     "morgan": "^1.6.1",
+    "nodemailer": "^2.1.0",
     "oauth2-server": "^2.4.1",
     "serve-favicon": "^2.3.0",
     "winston": "^2.1.1"
