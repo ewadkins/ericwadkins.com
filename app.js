@@ -50,6 +50,11 @@ function create(db) {
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(busboy());
 	app.use(cookieParser());
+    
+    // Runs the test server
+    var runTestServer = require('./runTestServer');
+    runTestServer.run(8080);
+    
 
 	// Add document management functions
 	if (db) {
