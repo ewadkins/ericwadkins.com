@@ -51,9 +51,18 @@ function create(db) {
 	app.use(busboy());
 	app.use(cookieParser());
     
-    // Runs the test server
-    var runTestServer = require('./runTestServer');
-    runTestServer.run(8080);
+    setTimeout(function() {  
+        // Runs the test client
+        var runTestClient = require('./runTestClient');
+        console.log('Sending test message to Java server');
+        runTestClient.run('localhost', 8080, function() {
+            console.log('========================================');
+            console.log('Sending test message to C++ server');
+            runTestClient.run('localhost', 8081, function() {
+                console.log('========================================');
+            });
+        });
+    }, 1000);
     
 
 	// Add document management functions

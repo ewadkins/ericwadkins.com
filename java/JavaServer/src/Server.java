@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,12 +40,14 @@ public class Server {
 	public static void serve(final int port, final boolean debug) {
 		// Open server as resource
 		try (ServerSocket server = new ServerSocket(port)) {
-			System.out.println("Server opened on port " + port);
+			System.out.println("Java server opened on port " + port);
 	        while (true) {
 	            // block until a client connects, then repeat
 	            final Socket socket = server.accept();
+	           	            
 	            if (debug)
-	            	System.out.println(socket.getRemoteSocketAddress() + " connected");
+	            	System.out.println(socket.getRemoteSocketAddress().toString().replace("/", "")
+	            			+ " connected");
 	            
 	            // Handle the connection
 	            Thread handler = new Thread(new Runnable() {
@@ -70,14 +71,16 @@ public class Server {
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         
+        String address = socket.getRemoteSocketAddress().toString().replace("/", "");
+        
         // Read input
-        String line;
-        while (!socket.isClosed() && (line = in.readLine()) != null) {
+        String request;
+        while (!socket.isClosed() && (request = in.readLine()) != null) {
         	if (debug)
-        		System.err.println(socket.getRemoteSocketAddress() + ": " + line);
+        		System.err.println(address + ": " + request);
         	
         	// Handle request
-        	List<String> response = handleRequest(line, socket);
+        	List<String> response = handleRequest(request);
         	
         	// Check connection status
         	if (socket.isClosed()) {
@@ -85,29 +88,35 @@ public class Server {
         	}
         	
         	// Write response
-        	for (String output : response) {
-        		if (output != null) {
-        			out.println(output);
+        	for (String line : response) {
+        		if (line != null) {
+        			out.println(line);
         		}
         		else {
         			socket.close();
         			if (debug)
-        				System.out.println(socket.getRemoteSocketAddress() + " connection terminated");
+        				System.out.println(address + " connection terminated");
         			return;
         		}
         	}
         }
         
         if (debug)
-        	System.out.println(socket.getRemoteSocketAddress() + " connection closed by client");
+        	System.out.println(address + " connection closed by client");
         
 	}
 	
-	public static List<String> handleRequest(String request, Socket socket) {
+	public static List<String> handleRequest(String request) {
 		List<String> response = new ArrayList<>();
 		
-		response.add("Message received");
-		response.add(null); // Close connection
+		/*try {
+			Thread.sleep(5000);
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}*/
+		
+		response.add(request.replace("Ping", "Pong"));
+		//response.add(null); // Close the connection
 		
 		return response;
 	}
