@@ -106,8 +106,9 @@ $(function() {
         })
         .error(function() {
             $('#output').empty().html("<h4>A request from this IP has already been sent. Please wait for it to finish, or cancel it.</h4>");
-            $('#generate').prop('disabled', true);
+            $('#generate').prop('disabled', false);
             $('#cancel').prop('disabled', true);
+            clearInterval(intervalId);
         });
         
         intervalId = setInterval(function() {
@@ -120,9 +121,6 @@ $(function() {
                 $('#status').html(data.status);
             })
             .error(function(xhr, textStatus, errorThrown) {
-                $('#output').empty().html("<h4>You may now send a request.</h4>");
-                $('#generate').prop('disabled', false);
-                $('#cancel').prop('disabled', true);
                 clearInterval(intervalId);
             });
         }, 300, 0);

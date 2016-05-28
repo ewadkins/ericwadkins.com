@@ -79,7 +79,9 @@ module.exports = function(db){
                 if (extension !== 'zip') return;
                 var fstream = fs.createWriteStream(dir + identifier + '.zip');
                 fstream.on('finish', function() {
-                    sessions[req.ip].status = 'Unzipping';
+                    if (sessions[req.ip]) {
+                        sessions[req.ip].status = 'Unzipping';
+                    }
                     child = spawn('unzip', [dir + identifier + '.zip', '-d', dir + identifier]);
                     child.stdout.on('data', function (data) {
                         //console.log('stdout: ' + data);
@@ -148,7 +150,9 @@ module.exports = function(db){
                 if (data.startsWith('PROGRESS')) {
                     var temp = data.split(' ')[1].split('/');
                     var progress = parseFloat(temp[0]) / parseFloat(temp[1]);
-                    sessions[req.ip].progress = progress;
+                    if (sessions[req.ip]) {
+                        sessions[req.ip].progress = progress;
+                    }
                 }
             });
             process.stderr.on('data', function(data) {
@@ -157,9 +161,14 @@ module.exports = function(db){
             process.on('close', function(code) {
                 //console.log('Exited with code ' + code);
                 console.log('Finished!');
-                var body = fs.readFileSync(dir + identifier + '.jpg');
-                var data = new Buffer(body, 'binary').toString('base64');
-                res.send(data);
+                if (fs.existsSync(dir + identifier + '.zip')) {
+                    var body = fs.readFileSync(dir + identifier + '.jpg');
+                    var data = new Buffer(body, 'binary').toString('base64');
+                    res.send(data);
+                }
+                else {
+                    res.end();
+                }
                 setTimeout(function() {
                     cleanup(identifier, req.ip);
                 }, 1000);
