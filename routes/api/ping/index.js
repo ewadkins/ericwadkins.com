@@ -13,8 +13,9 @@ module.exports = function(db){
 	});
     
     router.post('/', function(req, res, next) {
-        console.log(req.headers);
-        console.log(req.body.toString());
+        //console.log(req.headers);
+        //console.log(req.body);
+        console.log(req.busboy);
         res.send(req.body);
 	});
     

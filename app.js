@@ -5,7 +5,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var busboy = require('connect-busboy');
+//var busboy = require('connect-busboy');
 var fs = require('fs');
 
 function create(db) {
@@ -48,8 +48,11 @@ function create(db) {
 	//app.use(favicon(path.join(__dirname, 'public/images/favicon.ico')));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.raw({ type: '*/*' }));
-	app.use(busboy());
+    app.use(bodyParser.raw({ type: function(req) {
+        var contentType = req.headers['content-type'];
+        return contentType && contentType.startsWith('text');
+    } }));
+	//app.use(busboy());
 	app.use(cookieParser());
     
     setTimeout(function() {  
@@ -111,6 +114,7 @@ function create(db) {
 	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db, logger));
 	app.use('/mail', require(path.join(__dirname, config.server.routesDirectory, 'mail'))(db, logger));
 	app.use('/api/wiki', require(path.join(__dirname, config.server.routesDirectory, 'api/wiki'))(db, logger));
+	app.use('/api/collage', require(path.join(__dirname, config.server.routesDirectory, 'api/collage'))(db, logger));
 	app.use('/api/ping', require(path.join(__dirname, config.server.routesDirectory, 'api/ping'))(db, logger));
 
 	app.use(express.static(path.join(__dirname, config.server.publicDirectory)));
