@@ -104,8 +104,16 @@ $(function() {
                                       + '<img style="max-height:100%; max-width:100%;" src="data:image/jpeg;base64,' + data + '"></img></a>');
             $('#footer').prop('hidden', false);
         })
-        .error(function() {
-            $('#output').empty().html("<h4>A request from this IP has already been sent. Please wait for it to finish, or cancel it.</h4>");
+        .error(function(xhr) {
+            if (xhr.status == 403) {
+                $('#output').empty().html("<h4>Could not complete your request. A request has already been sent from this IP address.</h4>");
+            }
+            else if (xhr.status == 400) {
+                $('#output').empty().html("<h4>Could not complete your request. No .jpg images were found in the uploaded .zip file.</h4>");
+            }
+            else {
+                $('#output').empty().html("<h4>Could not complete your request. An error has occurred.</h4>");
+            }
             $('#generate').prop('disabled', false);
             $('#cancel').prop('disabled', true);
             clearInterval(intervalId);

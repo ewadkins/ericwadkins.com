@@ -120,7 +120,7 @@ module.exports = function(db){
 	});
 	
     router.get('/progress', function(req, res, next) {
-        if (sessions[req.ip]) {            
+        if (sessions[req.ip]) {
             console.log('Sending progress: ' + sessions[req.ip].progress);
             res.json({ status: sessions[req.ip].status, 
                       progress: sessions[req.ip].progress });
@@ -161,17 +161,21 @@ module.exports = function(db){
             process.on('close', function(code) {
                 //console.log('Exited with code ' + code);
                 console.log('Finished!');
-                if (fs.existsSync(dir + identifier + '.zip')) {
+                if (fs.existsSync(dir + identifier + '.jpg')) {
                     var body = fs.readFileSync(dir + identifier + '.jpg');
                     var data = new Buffer(body, 'binary').toString('base64');
                     res.send(data);
                 }
                 else {
+                    res.status(400);
                     res.end();
                 }
                 setTimeout(function() {
                     cleanup(identifier, req.ip);
                 }, 1000);
+            });
+            process.on('error', function() {
+                console.log("ERROR");
             });
             sessions[req.ip].process = process;
 
