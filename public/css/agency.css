@@ -234,6 +234,10 @@ header .intro-text {
     padding-top: 100px;
     padding-bottom: 50px
 }
+header img {
+    margin: auto;
+    border: 7px solid #fff
+}
 header .intro-text .intro-lead-in {
     font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: italic;
@@ -251,8 +255,8 @@ header .intro-text .intro-heading {
 }
 @media (min-width: 768px) {
     header .intro-text {
-        padding-top: 300px;
-        padding-bottom: 200px
+        padding-top: 150px;
+        padding-bottom: 100px
     }
     header .intro-text .intro-lead-in {
         font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -269,6 +273,13 @@ header .intro-text .intro-heading {
         line-height: 75px;
         margin-bottom: 50px
     }
+}
+section .contact-info {
+    font-size: 16px;
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    color: white;
 }
 section {
     padding: 100px 0
