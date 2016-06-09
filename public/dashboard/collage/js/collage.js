@@ -133,6 +133,10 @@ $(function() {
             });
         }, 300, 0);
     });
+    
+    
+    alert('The Collage Generator server is not live at the moment and will not return a response.');
+    
 
 });
 

@@ -13,6 +13,18 @@ $(function() {
         }, 1500, 'easeInOutExpo');
         event.preventDefault();
     });
+    
+    /*window.MutationObserver = window.MutationObserver
+    || window.WebKitMutationObserver
+    || window.MozMutationObserver;
+    var observer = new MutationObserver(function(mutation) {
+        if (mutation[0].target.height !== 'auto') {
+            mutation[0].target.height = 'auto';
+        }
+    });
+    $('iframe[id^="ghcard-ewadkins-"]').each(function() {
+        observer.observe($(this)[0], { attributes: true });
+    });*/
 });
 
 // Highlight the top nav as scrolling occurs
