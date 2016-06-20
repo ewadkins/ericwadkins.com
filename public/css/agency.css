@@ -306,6 +306,35 @@ section h3.section-subheading {
     margin: 15px 0;
     text-transform: none
 }
+
+.portfolio-div {
+    display: table-cell;
+    height: 250px;
+    width: 100vw;
+    padding: 20px;
+    vertical-align: middle;
+    text-align: center
+}
+
+.portfolio-div h1 {
+    color: #333333;
+    font-size: 64px;
+    font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    //font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    line-height: 90%;
+    margin: 0px;
+    margin-bottom: 15px
+}
+
+.portfolio-div p {
+    color: #ffffff;
+    font-size: 20px;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    //font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    line-height: 120%;
+    margin: 0px
+}
+
 #portfolio .portfolio-item {
     margin: 0 0 15px;
     right: 0
@@ -314,7 +343,8 @@ section h3.section-subheading {
     display: block;
     position: relative;
     max-width: 400px;
-    margin: 0 auto
+    margin: 0 auto;
+    text-decoration: none
 }
 #portfolio .portfolio-item .portfolio-link .portfolio-hover {
     background: rgba(254, 209, 54, .9);
