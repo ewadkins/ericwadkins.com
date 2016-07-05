@@ -679,10 +679,18 @@
                             <img class="img-responsive img-centered" src="img/raycast_big.png" alt="">
                             <p>An AI which simulates a robot that uses AI techniques to perform tasks such as estimating its location on a map and navigating towards a goal through an unknown maze in real time.</p>
                             <p>Given an image, the simulation creates a map and uses AI techniques such as Ray Casting, Spatial Mapping, Bayesian Filtering, and Pathfinding to perform tasks such as navigating from a start to a goal given <strong>no knowledge</strong> of the layout the map (as shown in the image above), or determine its location within the map based on the features of the map it has encountered so far.</p>
-                            <video width="450" height="450" controls>
+                            <video id="raycastVideo" width="450" height="450" controls autoplay>
                                 <source src="vid/raycast_video.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
+                            <script>
+                                document.getElementById('raycastVideo').addEventListener('ended', function(e) {
+                                    console.log('ended');
+                                    setTimeout(function(){
+                                        document.getElementById('raycastVideo').play();
+                                    }, 2000);
+                                }, false);
+                            </script>
                             <p>
                             <i>The above video shows the AI navigate through the maze from start to goal without any prior knowledge of the map. This is done solely by collecting data from its sensors (the rays are shown in red) which report distances to obstacles, and then using Spatial Mapping and Pathfinding (modified <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="blank">A* algorithm</a>).</i>
                             </p>
