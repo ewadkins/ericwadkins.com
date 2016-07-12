@@ -8,7 +8,7 @@ var transporter = nodemailer.createTransport({
 	service: 'Gmail',
 	auth: {
 		user: 'noreply8345@gmail.com',
-		pass: 'password8345' // Don't care if this is public, enjoy github
+		pass: 'idontcare12345' // Don't care if this is public, enjoy github
 	}
 });
 
