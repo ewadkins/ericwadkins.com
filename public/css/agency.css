@@ -772,3 +772,15 @@ body {
     width: 400px;
     height: 250px;
 }
+
+.client-link {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.client-link img {
+    max-width: 300px;
+    max-height: 100px;
+}
