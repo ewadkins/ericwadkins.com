@@ -12,7 +12,8 @@ var config = {
 			publicDirectory: 'public',
 			routesDirectory: 'routes',
 			logDirectory: 'logs',
-			index: 'index.html'
+			index: 'index.html',
+			resume: 'doc/Resume - Eric Wadkins 2016.pdf'
 		},    
 		db: {
 			hostname: 'ds059165.mongolab.com',
