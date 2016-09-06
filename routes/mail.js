@@ -10,7 +10,7 @@ module.exports = function(db, logger){
                     + 'Email: ' + document.email + '\n'
                     + (document.phone ? 'Phone: ' + document.phone + '\n' : '') + '\n'
                     + 'Message:\n\n' + document.message;
-        app.mail('ewadkins83@gmail.com', 'Contact Form - ericwadkins.com', message, false, function(success) {
+        app.mail('info@ericwadkins.com', 'Contact Form - ericwadkins.com', message, false, function(success) {
             res.status(success ? 200 : 500);
             res.end();
         });
