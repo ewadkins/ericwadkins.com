@@ -1,5 +1,6 @@
 var config = require('./config');
 var express = require('express');
+var serveIndex = require('serve-index');
 var oauthServer = require('oauth2-server');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -119,6 +120,14 @@ function create(db) {
 	app.use('/api/collage', require(path.join(__dirname, config.server.routesDirectory, 'api/collage'))(db, logger));
 	app.use('/api/ping', require(path.join(__dirname, config.server.routesDirectory, 'api/ping'))(db, logger));
 
+    app.use('/files', function(req, res, next) {
+        if (fs.lstatSync(path.join(__dirname, config.server.publicDirectory, req.url)).isFile()) {
+            res.redirect(req.url);
+        }
+        else {
+            serveIndex(path.join(__dirname, config.server.publicDirectory), { icons: true })(req, res, next);
+        }
+    });
 	app.use(express.static(path.join(__dirname, config.server.publicDirectory)));
 	
 	/*app.get('/test', app.oauth.weakAuthentication(), function(req, res) {
