@@ -122,7 +122,7 @@ function create(db) {
 	app.use('/api/ping', require(path.join(__dirname, config.server.routesDirectory, 'api/ping'))(db, logger));
 
     app.use('/files', function(req, res, next) {
-        if (fs.lstatSync(path.join(__dirname, config.server.publicDirectory, req.url)).isFile()) {
+        if (fs.lstatSync(path.join(__dirname, config.server.publicDirectory, decodeURI(req.url))).isFile()) {
             res.redirect(req.url);
         }
         else {
