@@ -13,6 +13,7 @@ var config = {
 			routesDirectory: 'routes',
 			logDirectory: 'logs',
 			index: 'index.html',
+			schedule: 'schedule.html',
 			resume: 'doc/Resume - Eric Wadkins 2016.pdf',
             signature: 'img/signature_transparent.png'
 		},    

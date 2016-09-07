@@ -113,6 +113,7 @@ function create(db) {
 
 	// Configure paths
 	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db, logger));
+	app.use('/schedule', require(path.join(__dirname, config.server.routesDirectory, 'schedule'))(db, logger));
 	app.use('/mail', require(path.join(__dirname, config.server.routesDirectory, 'mail'))(db, logger));
 	app.use('/resume', require(path.join(__dirname, config.server.routesDirectory, 'resume'))(db, logger));
 	app.use('/signature', require(path.join(__dirname, config.server.routesDirectory, 'signature'))(db, logger));
