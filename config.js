@@ -15,7 +15,11 @@ var config = {
 			index: 'index.html',
 			schedule: 'schedule.html',
 			resume: 'doc/Resume - Eric Wadkins 2016.pdf',
-            signature: 'img/signature_transparent.png'
+            signature: 'img/signature_transparent.png',
+            
+			dashboard: 'dashboard/index.html',
+			collage: 'dashboard/collage/index.html',
+			gas: 'dashboard/gas/index.html',
 		},    
 		db: {
 			hostname: 'ds059165.mongolab.com',

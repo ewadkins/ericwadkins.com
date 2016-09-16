@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+    
+<head>
+
+    <meta name="description" content="A gas simulation game inspired by a MIT 6.009 lab.">
+    <meta name="author" content="Eric Wadkins">
+    <meta name="keywords" content="Gas Simulation, Gas, Simulation">
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/font-awesome-4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/dashboard/gas/simulation.css">
+
+    <title>Eric Wadkins | Gas Simulation</title>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-80254861-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+</head>
+
+<body style="max-width: 500px">
+    
+    <div class="row" style="margin: 16px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Tools
+            </div>
+            <div class="panel-body">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input id="gas" type="radio" name="tool" checked> <label><h5 style="margin: 0px">Gas</h5></label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input id="wall" type="radio" name="tool"> <label><h5 style="margin: 0px">Wall</h5></label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input id="eraser" type="radio" name="tool"> <label><h5 style="margin: 0px">Eraser</h5></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Simulation
+            </div>
+            <div class="panel-body">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input id="paused" type="checkbox" checked> <label><h5 style="margin: 0px">Paused</h5></label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input id="random" type="checkbox" checked> <label><h5 style="margin: 0px">Randomize</h5></label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input id="vectors" type="checkbox"> <label><h5 style="margin: 0px">Vectors</h5></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Reset
+            </div>
+            <div class="panel-body">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <button id="cleargas" class="btn btn-default"> <label><h5 style="margin: 0px">Clear Gas</h5></label></button>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <button id="clearwalls" class="btn btn-default"> <label><h5 style="margin: 0px">Clear Walls</h5></label></button>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <button id="reset" class="btn btn-default"> <label><h5 style="margin: 0px">Reset</h5></label></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Variables
+            </div>
+            <div class="panel-body">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <h5 style="margin: 0px">Speed</h5>
+                        <div class="input-group number-spinner">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default range-button" data-dir="dwn"><span class="fa fa-minus"></span></button>
+                            </span>
+                            <input id="speed" type="text" class="form-control text-center" data-min="1" data-max="10" data-interval="1" value="1">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default range-button" data-dir="up"><span class="fa fa-plus"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <h5 style="margin: 0px">Brush Size</h5>
+                        <div class="input-group number-spinner">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default range-button" data-dir="dwn"><span class="fa fa-minus"></span></button>
+                            </span>
+                            <input id="brush" type="text" class="form-control text-center" data-min="1" data-max="10" data-interval="1" value="2">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default range-button" data-dir="up"><span class="fa fa-plus"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <h5 style="margin: 0px">Random Factor</h5>
+                        <div class="input-group number-spinner">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default range-button" data-dir="dwn"><span class="fa fa-minus"></span></button>
+                            </span>
+                            <input id="randomfactor" type="text" class="form-control text-center" data-min="0" data-max="10" data-interval="1" value="3">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default range-button" data-dir="up"><span class="fa fa-plus"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="simulation" style="border: 2px solid black; width: 100%; height: 100%"></canvas>
+
+        <script src="/js/jquery.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/dashboard/gas/simulation.js"></script>
+    </div>
+    
+</body>
+
+</html>

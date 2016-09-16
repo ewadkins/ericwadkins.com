@@ -1,0 +1,38 @@
+.form-group {
+    margin: 0px;
+}
+
+.btn label {
+    margin: 0px;
+}
+
+.btn:not(.range-button) {
+    padding: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin: 2px;
+}
+
+.number-spinner {
+    margin: 2px;
+}
+
+.number-spinner input, .number-spinner button {
+    padding: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+    height: 25px;
+}
+
+.panel-heading {
+    padding: 0px;
+    padding-left: 8px;
+}
+
+.panel-body {
+    padding: 0px;
+}
+
+.panel {
+    margin-bottom: 8px;
+}
