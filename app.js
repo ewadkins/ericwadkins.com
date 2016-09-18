@@ -56,7 +56,7 @@ function create(db) {
 	//app.use(busboy());
 	app.use(cookieParser());
     
-    setTimeout(function() {  
+    /*setTimeout(function() {  
         // Runs the test client
         var runTestClient = require('./runTestClient');
         console.log('Sending test message to Java server');
@@ -67,7 +67,7 @@ function create(db) {
                 console.log('========================================');
             });
         });
-    }, 1000);
+    }, 1000);*/
     
 
 	// Add document management functions

@@ -3,14 +3,16 @@ module.exports = mail;
 
 var fs = require('fs');
 var nodemailer = require('nodemailer');
+var mg = require('nodemailer-mailgun-transport');
 
-var transporter = nodemailer.createTransport({
-	service: 'Gmail',
-	auth: {
-		user: 'noreply8345@gmail.com',
-		pass: 'idontcare12345' // Don't care if this is public, enjoy github
-	}
-});
+var transporter = nodemailer.createTransport(
+    mg({
+        auth: {
+            api_key: process.env.MAILGUN_KEY,
+            domain: 'mg.ericwadkins.com'
+        }
+    })
+);
 
 function mail(to, subject, message, isHtml, callback) {
 	if (Array.isArray(to)) {
@@ -34,6 +36,7 @@ function mail(to, subject, message, isHtml, callback) {
 	}
 	else {
 		var mailOptions = {
+                from: 'no_reply@ericwadkins.com',
 				to: to,
 				subject: subject,
 				text: message,
@@ -48,7 +51,7 @@ function mail(to, subject, message, isHtml, callback) {
 				successful = false;
 			}
 			else {
-				console.log('Message sent: ' + info.response);
+				console.log('Message sent: ' + JSON.stringify(info));
 			}
 			if (callback) {
 				callback(successful);
