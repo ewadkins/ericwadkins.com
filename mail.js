@@ -36,7 +36,7 @@ function mail(to, subject, message, isHtml, callback) {
 	}
 	else {
 		var mailOptions = {
-                from: 'no_reply@ericwadkins.com',
+                from: 'eric@ericwadkins.com',
 				to: to,
 				subject: subject,
 				text: message,
