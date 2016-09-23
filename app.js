@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //var busboy = require('connect-busboy');
 var fs = require('fs');
+var geoip = require('geoip-lite');
 
 function create(db) {
 
@@ -111,6 +112,43 @@ function create(db) {
 		}
 	}*/
 
+	// Add GeoIP tracker
+    var recentMap = {};
+    var timeGranularity = 5 * 60; // 5 minutes
+    app.use(function(req, res, next) {
+        // Never block the request
+        setTimeout(function() {
+            var ip = req.ip;
+            for (var field in recentMap) {
+                if (recentMap.hasOwnProperty(field)) {
+                    if (new Date().getTime() - new Date(recentMap[field]).getTime() > timeGranularity * 1000) {
+                        delete recentMap[field];
+                    }
+                }
+            }
+            if (!recentMap[ip]) {
+                recentMap[ip] = new Date();
+                var geo = geoip.lookup(ip);
+                if (geo) {
+                    var message = 'IP: ' + geoip.pretty(ip) + '\n'
+                                + 'Range: ' + geo.range + '\n'
+                                + 'Country: ' + geo.country + '\n'
+                                + 'Region: ' + geo.region + '\n'
+                                + 'City: ' + geo.city + '\n'
+                                + 'Latitude/Longitude: ' + geo.ll + '\n'
+                                + 'Date/Time: ' + new Date()
+                    app.mail('info@ericwadkins.com', 'GeoIP Tracker - ericwadkins.com', message, false, function(success) {
+                        if (!success) {
+                            logger.error('Error sending GeoIP Tracker email. Results:');
+                            logger.error(geo);
+                        }
+                    });
+                }
+            }
+        }, 0);
+        next();
+    });
+    
 	// Configure paths
 	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db, logger));
 	app.use('/schedule', require(path.join(__dirname, config.server.routesDirectory, 'schedule'))(db, logger));
