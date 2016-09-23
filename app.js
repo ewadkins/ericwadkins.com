@@ -134,21 +134,24 @@ function create(db) {
             if (!recentMap[ip]) {
                 recentMap[ip] = new Date();
                 var geo = geoip.lookup(ip);
+                var message = 'IP: ' + geoip.pretty(ip) + '\n'
+                            + 'Date/Time: ' + new Date() + '\n';
                 if (geo) {
-                    var message = 'IP: ' + geoip.pretty(ip) + '\n'
-                                + 'Range: ' + geo.range + '\n'
-                                + 'Country: ' + geo.country + '\n'
-                                + 'Region: ' + geo.region + '\n'
-                                + 'City: ' + geo.city + '\n'
-                                + 'Latitude/Longitude: ' + geo.ll + '\n'
-                                + 'Date/Time: ' + new Date()
-                    app.mail('info@ericwadkins.com', 'GeoIP Tracker - ericwadkins.com', message, false, function(success) {
-                        if (!success) {
-                            logger.error('Error sending GeoIP Tracker email. Results:');
-                            logger.error(geo);
-                        }
-                    });
+                    message += 'Range: ' + geo.range + '\n'
+                        + 'Country: ' + geo.country + '\n'
+                        + 'Region: ' + geo.region + '\n'
+                        + 'City: ' + geo.city + '\n'
+                        + 'Latitude/Longitude: ' + geo.ll
                 }
+                else {
+                    message += 'GeoIP lookup failed'
+                }
+                app.mail('info@ericwadkins.com', 'GeoIP Tracker - ericwadkins.com', message, false, function(success) {
+                    if (!success) {
+                        logger.error('Error sending GeoIP Tracker email. Results:');
+                        logger.error(geo);
+                    }
+                });
             }
         }, 0);
         next();
