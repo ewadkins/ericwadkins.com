@@ -122,11 +122,6 @@ function create(db) {
                                         || req.headers["x-forwarded-for"]
                                         || req.client.remoteAddress
                                         || '';
-            // Strip all but IPv4 address
-            var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
-            if (ipv4Index !== -1) {
-                ip = ip.slice(ipv4Index);
-            }
             for (var field in recentMap) {
                 if (recentMap.hasOwnProperty(field)) {
                     if (new Date().getTime() - new Date(recentMap[field]).getTime() > timeGranularity * 1000) {
@@ -136,7 +131,7 @@ function create(db) {
             }
             if (!recentMap[ip]) {
                 recentMap[ip] = new Date();
-                var geo = geoip.lookup(ip);
+                var geo = geoip.lookup(ip) || geo.lookup(ip.slice(ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/)));
                 var message = 'IP: ' + geoip.pretty(ip) + '\n'
                             + 'Date/Time: ' + new Date() + '\n';
                 if (geo) {
