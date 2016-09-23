@@ -118,7 +118,12 @@ function create(db) {
     app.use(function(req, res, next) {
         // Never block the request
         setTimeout(function() {
-            var ip = req.ip;
+            var ip = req.ip || '';
+            // Strip all but IPv4 address
+            var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
+            if (ipv4Index !== -1) {
+                ip = ip.slice(ipv4Index);
+            }
             for (var field in recentMap) {
                 if (recentMap.hasOwnProperty(field)) {
                     if (new Date().getTime() - new Date(recentMap[field]).getTime() > timeGranularity * 1000) {
