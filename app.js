@@ -118,7 +118,10 @@ function create(db) {
     app.use(function(req, res, next) {
         // Never block the request
         setTimeout(function() {
-            var ip = req.ip || '';
+            var ip = req.headers["X-Forwarded-For"]
+                                        || req.headers["x-forwarded-for"]
+                                        || req.client.remoteAddress
+                                        || '';
             // Strip all but IPv4 address
             var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
             if (ipv4Index !== -1) {
