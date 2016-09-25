@@ -11,6 +11,7 @@
     "busboy": "^0.2.13",
     "connect-busboy": "0.0.2",
     "cookie-parser": "^1.4.1",
+    "dns": "^0.2.2",
     "express": "^4.13.3",
     "geoip-lite": "^1.1.8",
     "mongodb": "^2.1.4",

@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 //var busboy = require('connect-busboy');
 var fs = require('fs');
 var geoip = require('geoip-lite');
+var dns = require('dns');
 
 function create(db) {
 
@@ -131,29 +132,56 @@ function create(db) {
             }
             if (!recentMap[ip]) {
                 recentMap[ip] = new Date();
-                var geo = geoip.lookup(ip) || geo.lookup(ip.slice(ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/)));
-                var message = 'IP: ' + geoip.pretty(ip) + '\n'
-                            + 'Date/Time: ' + new Date() + '\n';
-                if (geo) {
-                    message += 'Range: ' + geo.range + '\n'
-                        + 'Country: ' + geo.country + '\n'
-                        + 'Region: ' + geo.region + '\n'
-                        + 'City: ' + geo.city + '\n'
-                        + 'Latitude/Longitude: ' + geo.ll
-                }
-                else {
-                    message += 'GeoIP lookup failed'
-                }
-                app.mail('info@ericwadkins.com', 'GeoIP Tracker - ericwadkins.com', message, false, function(success) {
-                    if (!success) {
-                        logger.error('Error sending GeoIP Tracker email. Results:');
-                        logger.error(geo);
+                ip = '::ffff:18.111.115.230';
+                var geo = geoip.lookup(ip);
+                var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
+                if (ipv4Index !== -1) {
+                    ip = ip.slice(ipv4Index);
+                    if (!geo) {
+                        geo = geoip.lookup(ip);
                     }
+                }
+                reverseLookup(ip, function(err, domains) {
+                    var message = 'IP: ' + geoip.pretty(ip) + '\n'
+                                + 'Date/Time: ' + new Date() + '\n';
+                    if (!err && domains && domains.length) {
+                        message += 'DNS Reverse Lookup: ' + domains + '\n';
+                    }
+                    else {
+                        message += 'DNS reverse lookup failed\n';
+                    }
+                    if (geo) {
+                        message += 'Range: ' + geo.range + '\n'
+                            + 'Country: ' + geo.country + '\n'
+                            + 'Region: ' + geo.region + '\n'
+                            + 'City: ' + geo.city + '\n'
+                            + 'Latitude/Longitude: ' + geo.ll + '\n';
+                    }
+                    else {
+                        message += 'GeoIP lookup failed\n';
+                    }
+                    app.mail('info@ericwadkins.com', 'GeoIP Tracker - ericwadkins.com', message, false, function(success) {
+                        if (!success) {
+                            logger.error('Error sending GeoIP Tracker email. Results:');
+                            logger.error(message);
+                        }
+                    });
                 });
             }
         }, 0);
         next();
     });
+    
+    function reverseLookup(ip, callback) {
+        dns.reverse(ip, function(err, domains) {
+            if (err !== null) {
+                callback(err, null);
+            }
+            else {
+                callback(null, domains);
+            }
+	   });
+    }
     
 	// Configure paths
 	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db, logger));
