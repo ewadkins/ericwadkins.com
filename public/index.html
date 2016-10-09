@@ -325,6 +325,20 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
+                        <img src="img/audioanalyzer_small.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Audio Analyzer</h4>
+                        <p class="text-muted">Java/Arduino Project</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
                         <!--<img src="img/gray.png" class="img-responsive" alt="">-->
                         <div style="background-color: #f1c40f;" class="portfolio-div">
                             <h1>Location Tracker</h2>
@@ -337,7 +351,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
+                    <a href="#portfolioModal10" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
@@ -355,7 +369,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal10" class="portfolio-link" data-toggle="modal">
+                    <a href="#portfolioModal11" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
@@ -373,7 +387,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal11" class="portfolio-link" data-toggle="modal">
+                    <a href="#portfolioModal12" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
@@ -955,6 +969,42 @@ int ackermann(int m, int n) {
                     <div class="col-lg-10 col-lg-offset-1">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
+                            <h2>Audio Analyzer</h2>
+                            <p class="item-intro text-muted">Audio analyzer and Arduino LED controller</p>
+                            <img class="img-responsive img-centered" src="img/audioanalyzer_big.png" alt="Audio analyzer">
+                            <p>This application takes audio input from the microphone or speaker output, processes it, and then calculates certain audio metrics such as intensity gain, bass gain, average intensity, peak frequency, and estimated pitch. Coupled with the audio analyzer is an Arduino LED-controller, which I send serialized data about the changes in audio metrics in order to control a WS2812B LED-strip.</p>
+                            <p>The audio analyzer is able to extract useful information from audio in real-time. When processing the data, it takes into account the non-linearities of the human ear and modifies the data accordingly, in order to extract the most noticeable audio features. Then, it determines what information is required by the LED-controller and uses bit-packing to serialize and send the data as quickly as possible to give the smallest possible response time. Currently, the estimated pitch is mapped to a point on the color spectrum and used to control the hue of the lights, and the bass gain is used to control the brightness of the lights.</p>
+                            <p>Below is an example of the Audio Analyzer listening to the song <a href="https://www.youtube.com/watch?v=k1gsZ-OsGpI" target="blank">Hymn For The Weekend (Seeb remix) - Coldplay</a>.</p>
+                            <video controls="controls" width="915" height="330" name="Audio Analyzer" src="vid/audioanalyzer.mp4"></video>
+                            <p class="text-muted">Audio Analyzer listening to <a href="https://www.youtube.com/watch?v=k1gsZ-OsGpI" target="blank">Hymn For The Weekend (Seeb remix) - Coldplay</a></p>
+                            <p>
+                                <strong>View this project on GitHub: </strong><a href="https://github.com/ewadkins/AudioAnalyzer" target="blank">https://github.com/ewadkins/AudioAnalyzer</a>
+                            </p>
+                            <iframe src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=AudioAnalyzer" frameborder="0" scrolling="0" width="400" height="200" allowtransparency="true"></iframe>
+                            <div>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 9 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
                             <h2>Location Tracker</h2>
                             <p class="item-intro text-muted">Use GPS data to reveal patterns in your daily behavior</p>
                             <!--<img class="img-responsive img-centered" src="img/portfolio/dreams-preview.png" alt="">-->
@@ -974,8 +1024,8 @@ int ackermann(int m, int n) {
         </div>
     </div>
 
-    <!-- Portfolio Modal 9 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Portfolio Modal 10 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -1006,8 +1056,8 @@ int ackermann(int m, int n) {
         </div>
     </div>
 
-    <!-- Portfolio Modal 10 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Portfolio Modal 11 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -1037,8 +1087,8 @@ int ackermann(int m, int n) {
         </div>
     </div>
     
-    <!-- Portfolio Modal 11 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Portfolio Modal 12 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal12" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
