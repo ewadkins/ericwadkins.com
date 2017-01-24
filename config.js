@@ -14,7 +14,7 @@ var config = {
 			logDirectory: 'logs',
 			index: 'index.html',
 			schedule: 'schedule.html',
-			resume: 'doc/Resume - Eric Wadkins 2016.pdf',
+			resume: 'doc/Resume - Eric Wadkins 2017.pdf',
             signature: 'img/signature_transparent.png',
             
 			dashboard: 'dashboard/index.html',
