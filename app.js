@@ -143,8 +143,15 @@ function create(db) {
                 reverseLookup(ip, function(err, domains) {
                     var message = 'IP: ' + geoip.pretty(ip) + '\n'
                                 + 'Date/Time: ' + new Date() + '\n';
+                    var crawler = false;
                     if (!err && domains && domains.length) {
                         message += 'DNS Reverse Lookup: ' + domains + '\n';
+                        for (var d = 0; d < domains.length; d++) {
+                            if (domains[d].indexOf('crawl') !== -1) {
+                                crawler = true;
+                                break;
+                            }
+                        }
                     }
                     else {
                         message += 'DNS reverse lookup failed\n';
@@ -159,7 +166,8 @@ function create(db) {
                     else {
                         message += 'GeoIP lookup failed\n';
                     }
-                    app.mail('info@ericwadkins.com', 'GeoIP Tracker - ericwadkins.com', message, false, function(success) {
+                    app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + 'GeoIP Tracker - ericwadkins.com',
+                             message, false, function(success) {
                         if (!success) {
                             logger.error('Error sending GeoIP Tracker email. Results:');
                             logger.error(message);
