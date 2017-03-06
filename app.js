@@ -133,7 +133,6 @@ function create(db) {
             }
             if (!recentMap[ip]) {
                 recentMap[ip] = new Date();
-                ip = '18.111.109.38'
                 var geo = geoip.lookup(ip);
                 var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
                 if (ipv4Index !== -1) {
