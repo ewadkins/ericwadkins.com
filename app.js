@@ -133,6 +133,7 @@ function create(db) {
             }
             if (!recentMap[ip]) {
                 recentMap[ip] = new Date();
+                ip = '18.111.109.38'
                 var geo = geoip.lookup(ip);
                 var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
                 if (ipv4Index !== -1) {
@@ -159,7 +160,7 @@ function create(db) {
                     }
                     if (geo) {
                         message += 'Range: ' + geo.range + '\n'
-                            + 'Country: ' + (countries[geo.country] || geo.country) + '\n'
+                            + 'Country: ' + (countries[geo.country] ? countries[geo.country] + ' (' + geo.country + ')' : geo.country) + '\n'
                             + 'Region: ' + geo.region + '\n'
                             + 'City: ' + geo.city + '\n'
                             + 'Latitude/Longitude: ' + geo.ll + '\n';
