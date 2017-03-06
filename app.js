@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var geoip = require('geoip-lite');
 var dns = require('dns');
+var countries = require('./countries');
 
 function create(db) {
 
@@ -158,7 +159,7 @@ function create(db) {
                     }
                     if (geo) {
                         message += 'Range: ' + geo.range + '\n'
-                            + 'Country: ' + geo.country + '\n'
+                            + 'Country: ' + (countries[geo.country] || geo.country) + '\n'
                             + 'Region: ' + geo.region + '\n'
                             + 'City: ' + geo.city + '\n'
                             + 'Latitude/Longitude: ' + geo.ll + '\n';
