@@ -12,6 +12,8 @@ var geoip = require('geoip-lite');
 var dns = require('dns');
 var countries = require('./countries');
 
+process.env.TZ = 'America/New_York' 
+
 function create(db) {
 
 	app = express();
@@ -143,7 +145,11 @@ function create(db) {
                 }
                 reverseLookup(ip, function(err, domains) {
                     var message = 'IP: ' + geoip.pretty(ip) + '\n'
-                                + 'Date/Time: ' + new Date() + '\n';
+                                + 'Date/Time: '
+                                + new Date().toLocaleTimeString('en-US',
+                                        { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric',
+                                         minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true })
+                                + '\n';
                     var crawler = false;
                     if (!err && domains && domains.length) {
                         message += 'DNS Reverse Lookup: ' + domains + '\n';
