@@ -145,16 +145,17 @@ function create(db) {
                 }
                 reverseLookup(ip, function(err, domains) {
                     var message = '<table>';
-                    var styleAttr = 'style="padding-right:10px"'
-                    message += '<tr><td ' + styleAttr + '><b>IP Address</b></td><td>' + geoip.pretty(ip) + '</td></tr>'
-                        + '<tr><td ' + styleAttr + '><b>Date/Time</b></td><td>'
+                    var styleAttr = 'style="padding-right:10px"';
+                    var unknown = '(unknown)'
+                    message += '<tr><td ' + styleAttr + '><b> IP Address </b></td><td>' + geoip.pretty(ip) + '</td></tr>'
+                        + '<tr><td ' + styleAttr + '><b> Date/Time </b></td><td>'
                         + new Date().toLocaleTimeString('en-US',
                                     { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric',
                                      minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true })
                         + '</td></tr>';
                     var crawler = false;
                     if (!err && domains && domains.length) {
-                        message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td>' + domains + '</td></tr>';
+                        message += '<tr><td ' + styleAttr + '><b> DNS Reverse Lookup </b></td><td>' + domains + '</td></tr>';
                         for (var d = 0; d < domains.length; d++) {
                             if (domains[d].indexOf('crawl') !== -1 || domains[d].indexOf('spider') !== -1) {
                                 crawler = true;
@@ -166,14 +167,14 @@ function create(db) {
                         message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
                     }
                     if (geo) {
-                        message += '<tr><td ' + styleAttr + '><b>Range</b></td><td>' + geo.range + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b>Country</b></td><td>' + (countries[geo.country] ? countries[geo.country] + ' (' + geo.country + ')' : geo.country) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b>Region</b></td><td>' + geo.region + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b>City</b></td><td>' + geo.city + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b>Latitude/Longitude</b></td><td><a href="http://maps.google.com/?q=' + geo.ll + '">' + geo.ll + '</a></td></tr>';
+                        message += '<tr><td ' + styleAttr + '><b> Range </b></td><td>' + (geo.range || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> Country </b></td><td>' + ((countries[geo.country] ? countries[geo.country] + ' (' + geo.country + ')' : geo.country) || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> Region </b></td><td>' + (geo.region || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> City </b></td><td>' + (geo.city || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> Latitude/Longitude </b></td><td><a href="http://maps.google.com/?q=' + geo.ll + '">' + geo.ll + '</a></td></tr>';
                     }
                     else {
-                        message += '<tr><td colspan="0"><b>GeoIP lookup failed</b></td></tr>';
+                        message += '<tr><td colspan="0"> GeoIP lookup failed </td></tr>';
                     }
                     message += '</table>';
                     app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + 'GeoIP Tracker - ericwadkins.com',
