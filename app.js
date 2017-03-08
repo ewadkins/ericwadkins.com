@@ -163,7 +163,7 @@ function create(db) {
                         }
                     }
                     else {
-                        message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>DNS reverse lookup failed</i></td></tr>';
+                        message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
                     }
                     if (geo) {
                         message += '<tr><td ' + styleAttr + '><b>Range</b></td><td>' + geo.range + '</td></tr>'
