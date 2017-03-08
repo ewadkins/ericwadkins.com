@@ -154,7 +154,7 @@ function create(db) {
                     if (!err && domains && domains.length) {
                         message += 'DNS Reverse Lookup: ' + domains + '\n';
                         for (var d = 0; d < domains.length; d++) {
-                            if (domains[d].indexOf('crawl') !== -1) {
+                            if (domains[d].indexOf('crawl') !== -1 || domains[d].indexOf('spider') !== -1) {
                                 crawler = true;
                                 break;
                             }
