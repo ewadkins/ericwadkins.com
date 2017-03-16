@@ -177,7 +177,7 @@ function create(db) {
                         message += '<tr><td colspan="0"> GeoIP lookup failed </td></tr>';
                     }
                     message += '</table>';
-                    app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (geo && geo.country ? '[]' + geo.country + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
+                    app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (geo && geo.country ? '[' + geo.country + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
                              message, true, function(success) {
                         if (!success) {
                             logger.error('Error sending GeoIP Tracker email. Results:');
