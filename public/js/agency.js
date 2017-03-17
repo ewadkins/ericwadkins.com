@@ -10,8 +10,12 @@ $(function() {
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
+        }, 1500, 'easeInOutQuad'/*'easeInOutExpo'*/);
         event.preventDefault();
+    });
+    
+    $('html, body').on('mousewheel', function() {
+        $('html, body').stop(); // Stops autoscrolling upon manual scrolling
     });
     
     /*window.MutationObserver = window.MutationObserver
@@ -25,6 +29,17 @@ $(function() {
     $('iframe[id^="ghcard-ewadkins-"]').each(function() {
         observer.observe($(this)[0], { attributes: true });
     });*/
+    
+    $('.resizableImage').mouseenter(function() {
+        $(this).stop().animate({ width: $(this).attr('width') * 1.1, height: $(this).attr('height') * 1.1 });
+    });
+
+    $('.resizableImage').mouseleave(function() {
+        var x = $(this).attr('width'),
+            y = $(this).attr('height');
+
+        $(this).stop().animate({ width: x, height: y });
+    });
 });
 
 // Highlight the top nav as scrolling occurs
