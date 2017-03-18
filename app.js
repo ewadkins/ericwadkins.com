@@ -157,7 +157,7 @@ function create(db) {
                     if (!err && domains && domains.length) {
                         message += '<tr><td ' + styleAttr + '><b> DNS Reverse Lookup </b></td><td>' + domains + '</td></tr>';
                         for (var d = 0; d < domains.length; d++) {
-                            if (domains[d].indexOf('crawl-') !== -1 || domains[d].indexOf('spider-') !== -1 || domains[d].indexOf('bot-') !== -1) {
+                            if (/(crawl|spider|bot)[\.-]/.test(domains[d])) {
                                 crawler = true;
                                 break;
                             }
