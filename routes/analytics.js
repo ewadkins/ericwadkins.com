@@ -12,7 +12,7 @@ module.exports = function(db, logger){
             }
         }
         analytics.run(args, function(output) {
-            res.send('<style>*{background:black;font-family:monospace}</style>'
+            res.send('<style>*{background:black;font-family:monospace;color:white}</style>'
                      + output.replace());
         });
 	});

@@ -121,7 +121,7 @@ function create(db) {
     var recentMap = {};
     var timeGranularity = 5 * 60; // 5 minutes
     app.use(function(req, res, next) {
-        if (req.path === '/analytics') { // Exclude analytics route from tracker
+        if (req.path.indexOf('/analytics') === 0) { // Exclude analytics route from tracker
             return next();
         }
         

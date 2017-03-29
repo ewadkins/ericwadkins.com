@@ -2,8 +2,10 @@ var request = require('request');
 var csv = require('parse-csv');
 var parseDomain = require('parse-domain');
 var chalk = require('chalk');
+chalk.enabled = true; // Force enable
 var Convert = require('ansi-to-html');
 var convert = new Convert();
+require('dotenv').config();
 
 module.exports = { run: function(argv, callback) {
     var args = {};
@@ -26,8 +28,6 @@ var argAliases = {
 };
 
 if (require.main === module) { // If called from command line directly
-    require('dotenv').config();
-    url = process.env.FORM_DATA_URL; // Get URL from local env
     var argv = process.argv.splice(2);
     var args = {};
     var filters = false;
@@ -63,7 +63,7 @@ var dataLabels = {
 function run(args, callback) {
     request(url, function (error, response, body) {
         var rows = csv.toJSON(body, { headers: { included: true } });
-        var unknown = '<unknown>';
+        var unknown = '(unknown)';
         var parsed = [];
         for (var i = 0; i < rows.length; i++) {
             var obj = {};
@@ -72,18 +72,22 @@ function run(args, callback) {
                     obj[label] = rows[i][dataLabels[label]];
                 }
             }
-            obj.cityRegionCountry = (obj.city || unknown) + ', '
-                + (obj.region || unknown) + ', '
-                + (obj.country || unknown);
-            obj.regionCountry = (obj.region || unknown) + ', '
-                + (obj.country || unknown);
-            var ccMatches = /^[^()]*\(([^()]*)\)/.exec(obj.country);
+            obj.cityRegionCountry = (obj.city || unknown) + (obj.region ? ', ' + obj.region : '') + (obj.country ? ', ' + obj.country : '');
+            obj.regionCountry = (obj.region || unknown) + (obj.country ? ', ' + obj.country : '');
+            var ccMatches = /^[^()]+\(([^()]*)\)/.exec(obj.country);
+            obj.country = obj.country || unknown;
+            obj.region = obj.region || unknown;
+            obj.city = obj.city || unknown;
             obj.countryCode = ccMatches ? ccMatches[1] : obj.country;
             obj.date = new Date(obj.date);
             obj.crawler = obj.crawler === 'yes';
-            var parsedDomain = parseDomain(obj.lookup);
-            obj.domain = parsedDomain.domain + '.' + parsedDomain.tld;
-            obj.tld = parsedDomain.tld;
+            obj.domain = unknown;
+            obj.tld = '';
+            if (obj.lookup) {
+                var parsedDomain = parseDomain(obj.lookup);
+                obj.domain = parsedDomain.domain + '.' + parsedDomain.tld;
+                obj.tld = parsedDomain.tld;
+            }
 
             var filtered = false;
             for (var key in args) {
