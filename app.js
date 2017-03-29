@@ -116,13 +116,20 @@ function create(db) {
 			res.json({ error: 'Authentication failed' });
 		}
 	}*/
+    
+    var untracked = [
+        '/favicon.ico',
+        '/analytics'
+    ];
 
 	// Add GeoIP tracker
     var recentMap = {};
     var timeGranularity = 5 * 60; // 5 minutes
     app.use(function(req, res, next) {
-        if (req.path.indexOf('/analytics') === 0) { // Exclude analytics route from tracker
-            return next();
+        for (var i = 0; i < untracked.length; i++) {
+            if (req.path.indexOf(untracked[i]) === 0) {
+                return next();
+            }
         }
         
         // Never block the request
