@@ -93,7 +93,7 @@ function run(args, callback) {
             var filtered = false;
             for (var key in args) {
                 if (args.hasOwnProperty(key)) {
-                    if (obj[key] && obj[key].toString().indexOf(args[key]) === -1) {
+                    if ((obj[key] !== undefined) && obj[key].toString().indexOf(args[key]) === -1) {
                         filtered = true;
                     }
                 }
