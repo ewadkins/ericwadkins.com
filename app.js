@@ -203,7 +203,7 @@ function create(db) {
                                      geo ? region : '',
                                      geo ? city : '',
                                      geo ? ll : '',
-                                     crawler ? 'yes' : 'no')
+                                     crawler ? 'yes' : 'no');
                     message += '</table>';
                     app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (geo && geo.country ? '[' + geo.country + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
                              message, true, function(success) {
