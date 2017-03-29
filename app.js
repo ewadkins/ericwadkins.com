@@ -7,6 +7,7 @@ var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //var busboy = require('connect-busboy');
+var request = require('request');
 var fs = require('fs');
 var geoip = require('geoip-lite');
 var dns = require('dns');
@@ -176,6 +177,13 @@ function create(db) {
                     else {
                         message += '<tr><td colspan="0"> GeoIP lookup failed </td></tr>';
                     }
+                    logToSpreadsheet(ip,
+                                     domains && domains.length ? domains : '',
+                                     geo && geo.country ? geo.country : '',
+                                     geo && geo.region ? geo.region : '',
+                                     geo && geo.city ? geo.city : '',
+                                     geo && geo.ll ? geo.ll : '',
+                                     crawler ? 'yes' : 'no')
                     message += '</table>';
                     app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (geo && geo.country ? '[' + geo.country + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
                              message, true, function(success) {
@@ -189,6 +197,27 @@ function create(db) {
         }, 0);
         next();
     });
+    
+    function logToSpreadsheet(ip, dnsReverseLookup, country, region, city, latitudeLongitude, crawler) {
+        // GeoIP Tracker submission function
+        var formid = process.env.FORM_ID;
+        var data = {
+            "entry.1765119119": ip,
+            "entry.1581364175": dnsReverseLookup,
+            "entry.403197258": country,
+            "entry.1992079491": region,
+            "entry.1849033215": city,
+            "entry.1543205328": latitudeLongitude,
+            "entry.549135233": crawler
+        };
+        var params = [];
+        for (key in data) {
+            params.push(key + "=" + encodeURIComponent(data[key]));
+        }
+        var url = "https://docs.google.com/forms/d/" + formid + "/formResponse?" + params.join("&");
+        request(url, function (error, response, body) {
+        });
+    }
     
     function reverseLookup(ip, callback) {
         dns.reverse(ip, function(err, domains) {
