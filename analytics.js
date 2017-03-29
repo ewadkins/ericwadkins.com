@@ -15,8 +15,9 @@ module.exports = { run: function(argv, callback) {
         }
     }
     run(args, function(output) {
-        // Remove formatting if not command line
-        callback(convert.toHtml(output.replace(/ /g, '&nbsp;').replace(/\n/g, '<br>')));
+        // Returns html output
+        var style = '<style>*{background:black;font-family:monospace}</style>';
+        callback(style + convert.toHtml(output.replace(/ /g, '&nbsp;').replace(/\n/g, '<br>')));
     });
 }};
 
