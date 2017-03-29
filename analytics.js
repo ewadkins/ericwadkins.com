@@ -20,6 +20,7 @@ module.exports = { run: function(argv, callback) {
 }};
 
 var url = process.env.FORM_DATA_URL;
+console.log(url);
 
 var argAliases = {
     cc: 'countryCode',
