@@ -121,6 +121,10 @@ function create(db) {
     var recentMap = {};
     var timeGranularity = 5 * 60; // 5 minutes
     app.use(function(req, res, next) {
+        if (req.path === '/analytics') { // Exclude analytics route from tracker
+            return next();
+        }
+        
         // Never block the request
         setTimeout(function() {
             var ip = req.headers["X-Forwarded-For"]
@@ -210,23 +214,25 @@ function create(db) {
     function logToSpreadsheet(datetime, ip, dnsReverseLookup, country, region, city, latitudeLongitude, crawler) {
         // GeoIP Tracker submission function
         var formid = process.env.FORM_ID;
-        var data = {
-            "entry.1453902602": datetime,
-            "entry.1765119119": ip,
-            "entry.1581364175": dnsReverseLookup,
-            "entry.403197258": country,
-            "entry.1992079491": region,
-            "entry.1849033215": city,
-            "entry.1543205328": latitudeLongitude,
-            "entry.549135233": crawler
-        };
-        var params = [];
-        for (key in data) {
-            params.push(key + "=" + encodeURIComponent(data[key]));
+        if (formid) {
+            var data = {
+                "entry.1453902602": datetime,
+                "entry.1765119119": ip,
+                "entry.1581364175": dnsReverseLookup,
+                "entry.403197258": country,
+                "entry.1992079491": region,
+                "entry.1849033215": city,
+                "entry.1543205328": latitudeLongitude,
+                "entry.549135233": crawler
+            };
+            var params = [];
+            for (key in data) {
+                params.push(key + "=" + encodeURIComponent(data[key]));
+            }
+            var url = "https://docs.google.com/forms/d/" + formid + "/formResponse?" + params.join("&");
+            request(url, function (error, response, body) {
+            });
         }
-        var url = "https://docs.google.com/forms/d/" + formid + "/formResponse?" + params.join("&");
-        request(url, function (error, response, body) {
-        });
     }
     
     function reverseLookup(ip, callback) {
@@ -244,6 +250,7 @@ function create(db) {
 	app.use('/', require(path.join(__dirname, config.server.routesDirectory, 'index'))(db, logger));
 	app.use('/schedule', require(path.join(__dirname, config.server.routesDirectory, 'schedule'))(db, logger));
 	app.use('/mail', require(path.join(__dirname, config.server.routesDirectory, 'mail'))(db, logger));
+	app.use('/analytics', require(path.join(__dirname, config.server.routesDirectory, 'analytics'))(db, logger));
 	app.use('/resume', require(path.join(__dirname, config.server.routesDirectory, 'resume'))(db, logger));
 	app.use('/signature', require(path.join(__dirname, config.server.routesDirectory, 'signature'))(db, logger));
 	app.use('/api/wiki', require(path.join(__dirname, config.server.routesDirectory, 'api/wiki'))(db, logger));

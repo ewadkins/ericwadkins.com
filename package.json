@@ -6,12 +6,15 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "ansi-to-html": "^0.6.0",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.2",
     "busboy": "^0.2.13",
+    "chalk": "^1.1.3",
     "connect-busboy": "0.0.2",
     "cookie-parser": "^1.4.1",
     "dns": "^0.2.2",
+    "dotenv": "^4.0.0",
     "express": "^4.13.3",
     "geoip-lite": "^1.1.8",
     "mongodb": "^2.1.4",
@@ -19,11 +22,15 @@
     "nodemailer": "^2.1.0",
     "nodemailer-mailgun-transport": "^1.2.2",
     "oauth2-server": "^2.4.1",
+    "parse-csv": "^0.2.0",
+    "parse-domain": "^1.1.0",
     "path": "^0.12.7",
     "request": "^2.81.0",
     "serve-favicon": "^2.3.0",
     "serve-index": "^1.8.0",
     "unzip2": "^0.2.5",
     "winston": "^2.1.1"
+  },
+  "devDependencies": {
   }
 }
