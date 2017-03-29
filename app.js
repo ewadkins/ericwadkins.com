@@ -147,12 +147,13 @@ function create(db) {
                 reverseLookup(ip, function(err, domains) {
                     var message = '<table>';
                     var styleAttr = 'style="padding-right:10px"';
-                    var unknown = '(unknown)'
+                    var unknown = '(unknown)';
+                    var datetime = new Date().toLocaleTimeString('en-US',
+                                    { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric',
+                                     minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true });
                     message += '<tr><td ' + styleAttr + '><b> IP Address </b></td><td>' + geoip.pretty(ip) + '</td></tr>'
                         + '<tr><td ' + styleAttr + '><b> Date/Time </b></td><td>'
-                        + new Date().toLocaleTimeString('en-US',
-                                    { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric',
-                                     minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true })
+                        + datetime
                         + '</td></tr>';
                     var crawler = false;
                     if (!err && domains && domains.length) {
@@ -177,7 +178,8 @@ function create(db) {
                     else {
                         message += '<tr><td colspan="0"> GeoIP lookup failed </td></tr>';
                     }
-                    logToSpreadsheet(ip,
+                    logToSpreadsheet(datetime,
+                                     ip,
                                      domains && domains.length ? domains : '',
                                      geo && geo.country ? geo.country : '',
                                      geo && geo.region ? geo.region : '',
@@ -198,10 +200,11 @@ function create(db) {
         next();
     });
     
-    function logToSpreadsheet(ip, dnsReverseLookup, country, region, city, latitudeLongitude, crawler) {
+    function logToSpreadsheet(datetime, ip, dnsReverseLookup, country, region, city, latitudeLongitude, crawler) {
         // GeoIP Tracker submission function
         var formid = process.env.FORM_ID;
         var data = {
+            "entry.1453902602": dateTime,
             "entry.1765119119": ip,
             "entry.1581364175": dnsReverseLookup,
             "entry.403197258": country,
