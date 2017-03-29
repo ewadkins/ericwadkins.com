@@ -204,7 +204,7 @@ function create(db) {
         // GeoIP Tracker submission function
         var formid = process.env.FORM_ID;
         var data = {
-            "entry.1453902602": dateTime,
+            "entry.1453902602": datetime,
             "entry.1765119119": ip,
             "entry.1581364175": dnsReverseLookup,
             "entry.403197258": country,
