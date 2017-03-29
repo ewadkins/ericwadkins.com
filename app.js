@@ -168,12 +168,19 @@ function create(db) {
                     else {
                         message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
                     }
+                    var country, region, city, range, ll;
                     if (geo) {
-                        message += '<tr><td ' + styleAttr + '><b> Range </b></td><td>' + (geo.range || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> Country </b></td><td>' + ((countries[geo.country] ? countries[geo.country] + ' (' + geo.country + ')' : geo.country) || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> Region </b></td><td>' + (geo.region || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> City </b></td><td>' + (geo.city || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> Latitude/Longitude </b></td><td><a href="http://maps.google.com/?q=' + geo.ll + '">' + geo.ll + '</a></td></tr>';
+                        country = ((countries[geo.country] ? countries[geo.country]
+                                        + ' (' + geo.country + ')' : geo.country) || '');
+                        region = geo.region || '';
+                        city = geo.city || '';
+                        range = geo.range || '';
+                        ll = geo.ll || '';
+                        message += '<tr><td ' + styleAttr + '><b> Range </b></td><td>' + (range || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> Country </b></td><td>' + (country || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> Region </b></td><td>' + (region || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> City </b></td><td>' + (city || unknown) + '</td></tr>'
+                            + '<tr><td ' + styleAttr + '><b> Latitude/Longitude </b></td><td><a href="http://maps.google.com/?q=' + ll + '">' + ll + '</a></td></tr>';
                     }
                     else {
                         message += '<tr><td colspan="0"> GeoIP lookup failed </td></tr>';
@@ -181,10 +188,10 @@ function create(db) {
                     logToSpreadsheet(datetime,
                                      ip,
                                      domains && domains.length ? domains : '',
-                                     geo && geo.country ? geo.country : '',
-                                     geo && geo.region ? geo.region : '',
-                                     geo && geo.city ? geo.city : '',
-                                     geo && geo.ll ? geo.ll : '',
+                                     geo ? country : '',
+                                     geo ? region : '',
+                                     geo ? city : '',
+                                     geo ? ll : '',
                                      crawler ? 'yes' : 'no')
                     message += '</table>';
                     app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (geo && geo.country ? '[' + geo.country + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
