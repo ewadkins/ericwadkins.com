@@ -4,7 +4,6 @@ var parseDomain = require('parse-domain');
 var chalk = require('chalk');
 var Convert = require('ansi-to-html');
 var convert = new Convert();
-require('dotenv').config();
 
 module.exports = { run: function(argv, callback) {
     var args = {};
@@ -20,7 +19,6 @@ module.exports = { run: function(argv, callback) {
 }};
 
 var url = process.env.FORM_DATA_URL;
-console.log(url);
 
 var argAliases = {
     cc: 'countryCode',
@@ -28,6 +26,8 @@ var argAliases = {
 };
 
 if (require.main === module) { // If called from command line directly
+    require('dotenv').config();
+    url = process.env.FORM_DATA_URL; // Get URL from local env
     var argv = process.argv.splice(2);
     var args = {};
     var filters = false;
