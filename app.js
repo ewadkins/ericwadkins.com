@@ -187,7 +187,6 @@ function create(db) {
                         message += '<tr><td ' + styleAttr + '><b> Target </b></td><td>ericwadkins.com' + (path || unknown) + '</td></tr>';
 
                         // Add ip and domain info
-                        message += '</table><br><table>';
                         message += '<tr><td ' + styleAttr + '><b> IP Address </b></td><td>' + ip + '</td></tr>'
                         if (domain) {
                             message += '<tr><td ' + styleAttr + '><b> Long Domain </b></td><td>'
@@ -208,7 +207,6 @@ function create(db) {
                         }
 
                         // Add GeoIP info
-                        message += '</table><br><table>';
                         if (countryCode) {
                             countryStr = (country ? country + ' (' + countryCode + ')' : country) || '';
                             regionStr = (region ? region + ' (' + regionCode + ')' : region) || '';

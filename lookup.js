@@ -100,7 +100,7 @@ function geoLookup(ip, callback) {
     var geo = geoip.lookup(ip);
     var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
     if (ipv4Index !== -1) {
-        ip = ip.slice(ipv4Index);
+        ip = ip.slice(ipv4Index) || ip;
         if (!geo) {
             geo = geoip.lookup(ip);
         }
