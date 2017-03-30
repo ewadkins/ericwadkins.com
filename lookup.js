@@ -43,7 +43,7 @@ function analyze(ip, domain, geo, callback) {
     domain = parsed ? [parsed.domain, parsed.tld]
         .filter(n => n).join('.') : null;
     entity = parsed ? parsed.domain.toUpperCase() : null;
-    crawler = /(crawl|spider|bot)[\.-]/.test(domain);
+    crawler = /(crawl|spider|bot)[\.-]/.test(longDomain);
 
     // GeoIP lookup
     var country, countryCode, region, regionCode, regionType, city, latlong, range;
