@@ -153,7 +153,6 @@ function create(db) {
             // Never block the request
             setTimeout(function() {
                 
-                ip = '18.111.11.34';
                 lookup(ip, function(data) {
                     var ip = data.ip;
                     var domain = data.domain;
