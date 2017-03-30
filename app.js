@@ -9,11 +9,8 @@ var bodyParser = require('body-parser');
 //var busboy = require('connect-busboy');
 var request = require('request');
 var fs = require('fs');
-var geoip = require('geoip-lite');
-var dns = require('dns');
-var countries = require('./countries');
-
-process.env.TZ = 'America/New_York' 
+var lookup = require('./lookup');
+var wiki = require('./wiki-lookup');
 
 function create(db) {
 
@@ -118,103 +115,149 @@ function create(db) {
 	}*/
     
     var untracked = [
-        '/favicon.ico',
+        '/vid', // videos load dynamically and may send many requests
         '/analytics'
     ];
 
 	// Add GeoIP tracker
     var recentMap = {};
-    var timeGranularity = 5 * 60; // 5 minutes
+    var timeGranularity = 5; // 5 seconds (absorbs bursts of requests from a single page)
     app.use(function(req, res, next) {
-        for (var i = 0; i < untracked.length; i++) {
-            if (req.path.indexOf(untracked[i]) === 0) {
-                return next();
+        // Get ip
+        var ip = req.headers["X-Forwarded-For"]
+                                    || req.headers["x-forwarded-for"]
+                                    || req.client.remoteAddress
+                                    || '';
+        // Remove expired ips
+        for (var field in recentMap) {
+            if (recentMap.hasOwnProperty(field)) {
+                if (new Date().getTime() - new Date(recentMap[field]).getTime() > timeGranularity * 1000) {
+                    delete recentMap[field];
+                }
             }
         }
         
-        // Never block the request
-        setTimeout(function() {
-            var ip = req.headers["X-Forwarded-For"]
-                                        || req.headers["x-forwarded-for"]
-                                        || req.client.remoteAddress
-                                        || '';
-            for (var field in recentMap) {
-                if (recentMap.hasOwnProperty(field)) {
-                    if (new Date().getTime() - new Date(recentMap[field]).getTime() > timeGranularity * 1000) {
-                        delete recentMap[field];
-                    }
+        // If not a followup request
+        if (!recentMap[ip]) {
+            recentMap[ip] = new Date();
+            
+            // Don't record visits to untracked paths
+            for (var i = 0; i < untracked.length; i++) {
+                if (req.path.indexOf(untracked[i]) === 0) {
+                    return next();
                 }
             }
-            if (!recentMap[ip]) {
-                recentMap[ip] = new Date();
-                var geo = geoip.lookup(ip);
-                var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
-                if (ipv4Index !== -1) {
-                    ip = ip.slice(ipv4Index);
-                    if (!geo) {
-                        geo = geoip.lookup(ip);
-                    }
-                }
-                reverseLookup(ip, function(err, domains) {
-                    var message = '<table>';
-                    var styleAttr = 'style="padding-right:10px"';
-                    var unknown = '(unknown)';
-                    var datetime = new Date().toLocaleTimeString('en-US',
-                                    { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric',
-                                     minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true });
-                    message += '<tr><td ' + styleAttr + '><b> IP Address </b></td><td>' + geoip.pretty(ip) + '</td></tr>'
-                        + '<tr><td ' + styleAttr + '><b> Date/Time </b></td><td>'
-                        + datetime
-                        + '</td></tr>';
-                    var crawler = false;
-                    if (!err && domains && domains.length) {
-                        message += '<tr><td ' + styleAttr + '><b> DNS Reverse Lookup </b></td><td>' + domains + '</td></tr>';
-                        for (var d = 0; d < domains.length; d++) {
-                            if (/(crawl|spider|bot)[\.-]/.test(domains[d])) {
-                                crawler = true;
-                                break;
+            
+            var path = req.path;
+        
+            // Never block the request
+            setTimeout(function() {
+                
+                ip = '18.111.11.34';
+                lookup(ip, function(data) {
+                    var ip = data.ip;
+                    var domain = data.domain;
+                    var longDomain = data.longDomain;
+                    var entity = data.entity;
+                    var crawler = data.crawler;
+                    var country = data.country;
+                    var countryCode = data.countryCode;
+                    var region = data.region;
+                    var regionCode = data.regionCode;
+                    var regionType = data.regionType;
+                    var city = data.city;
+                    var latlong = data.latlong;
+                    var range = data.range;
+                    
+                    wiki((entity || '').toLowerCase(), function(description) {
+                        description = description || '<i>No description found</i>';
+                        
+                        var message = '<table>';
+                        var styleAttr = 'style="width:80px;padding-right:10px"';
+                        var unknown = '(unknown)';
+                        var datetime = new Date().toLocaleTimeString('en-US',
+                                        { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric',
+                                         minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true });
+
+                        // Add date/time
+                        message += '<tr><td ' + styleAttr + '><b> Date/Time </b></td><td>'
+                            + datetime + '</td></tr>';
+
+                        // Add target
+                        path = path || '/';
+                        message += '<tr><td ' + styleAttr + '><b> Target </b></td><td>ericwadkins.com' + (path || unknown) + '</td></tr>';
+
+                        // Add ip and domain info
+                        message += '</table><br><table>';
+                        message += '<tr><td ' + styleAttr + '><b> IP Address </b></td><td>' + ip + '</td></tr>'
+                        if (domain) {
+                            message += '<tr><td ' + styleAttr + '><b> Long Domain </b></td><td>'
+                                + (longDomain || unknown) + '</td></tr>';
+                            message += '<tr><td ' + styleAttr + '><b> Domain </b></td><td>'
+                                + (domain || unknown) + '</td></tr>';
+                            message += '<tr><td ' + styleAttr + '><b> Entity </b></td><td>'
+                                + (entity || unknown) + '</td></tr>';
+                            message += '<tr><td ' + styleAttr + '><b> Crawler? </b></td><td>'
+                                + (crawler ? 'Yes' : 'No') + '</td></tr>';
+
+                            // Add wiki description
+                            message += '<tr><td ' + styleAttr + '><b>Description</b></td><td>'
+                                + description + '</td></tr>';
+                        }
+                        else {
+                            message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
+                        }
+
+                        // Add GeoIP info
+                        message += '</table><br><table>';
+                        if (countryCode) {
+                            countryStr = (country ? country + ' (' + countryCode + ')' : country) || '';
+                            regionStr = (region ? region + ' (' + regionCode + ')' : region) || '';
+                            message += '<tr><td ' + styleAttr + '><b> Range </b></td><td>'
+                                + (range ? range.join(' - ') : unknown) + '</td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> Country </b></td><td>'
+                                + (countryStr || unknown) + '</td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> Region </b></td><td>'
+                                + (regionStr || unknown) + '</td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> City </b></td><td>'
+                                + (city || unknown) + '</td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> Lat./Long. </b></td><td><a href="http://maps.google.com/?q=' + latlong + '">'+ latlong + '</a></td></tr>';
+                        }
+                        else {
+                            message += '<tr><td ' + styleAttr + '><b>GeoIP Lookup</b></td><td><i>Lookup failed</i></td></tr>';
+                        }
+
+                        message += '</table>';
+
+                        // Add preview
+                        var hiddenStyles = 'display:none !important;visibility:hidden;mso-hide:all;font-size:1px;'
+                        + 'color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;';
+                        message = '<div style="' + hiddenStyles + '">'
+                            + ((city || unknown) + (regionCode ? ', ' + regionCode : '')
+                               + (country ? ', ' + country : '')) + ' ' + ip + ' ' + domain
+                            + '</div>' + message;
+
+                        logToSpreadsheet(datetime,
+                                         ip,
+                                         longDomain || '',
+                                         country || '',
+                                         region || '',
+                                         city || '',
+                                         latlong || '',
+                                         crawler ? 'yes' : 'no');
+
+                        app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (countryCode ? '[' + countryCode + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
+                                 message, true, function(success) {
+                            if (!success) {
+                                logger.error('Error sending GeoIP Tracker email. Results:');
+                                logger.error(message);
                             }
-                        }
-                    }
-                    else {
-                        message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
-                    }
-                    var country, region, city, range, ll;
-                    if (geo) {
-                        country = ((countries[geo.country] ? countries[geo.country]
-                                        + ' (' + geo.country + ')' : geo.country) || '');
-                        region = geo.region || '';
-                        city = geo.city || '';
-                        range = geo.range || '';
-                        ll = geo.ll || '';
-                        message += '<tr><td ' + styleAttr + '><b> Range </b></td><td>' + (range || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> Country </b></td><td>' + (country || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> Region </b></td><td>' + (region || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> City </b></td><td>' + (city || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> Latitude/Longitude </b></td><td><a href="http://maps.google.com/?q=' + ll + '">' + ll + '</a></td></tr>';
-                    }
-                    else {
-                        message += '<tr><td colspan="0"> GeoIP lookup failed </td></tr>';
-                    }
-                    logToSpreadsheet(datetime,
-                                     ip,
-                                     domains && domains.length ? domains : '',
-                                     geo ? country : '',
-                                     geo ? region : '',
-                                     geo ? city : '',
-                                     geo ? ll : '',
-                                     crawler ? 'yes' : 'no');
-                    message += '</table>';
-                    app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (geo && geo.country ? '[' + geo.country + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
-                             message, true, function(success) {
-                        if (!success) {
-                            logger.error('Error sending GeoIP Tracker email. Results:');
-                            logger.error(message);
-                        }
+                        });
                     });
+                    
                 });
-            }
-        }, 0);
+            }, 0);
+        }
         next();
     });
     
