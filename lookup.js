@@ -21,13 +21,13 @@ module.exports = function(val, callback) {
                 return callback({});
             }
             console.log(ip);
-            geoLookup(ip, function(ip, geo) {
+            geoLookup(ip, function(geo) {
                 return analyze(ip, domain, geo, callback);
             });
         });
     }
     else {
-        geoLookup(ip, function(ip, geo) {
+        geoLookup(ip, function(geo) {
             reverseDnsLookup(ip, function(err, domain) {
                 if (err) {
                     return callback({});
@@ -105,7 +105,7 @@ function geoLookup(ip, callback) {
             geo = geoip.lookup(ip);
         }
     }
-    callback(ip, geo);
+    callback(geo);
 }
 
 function dnsLookup(domain, callback) {
