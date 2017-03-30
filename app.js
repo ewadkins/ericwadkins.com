@@ -231,7 +231,7 @@ function create(db) {
                         + 'color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;';
                         message = '<div style="' + hiddenStyles + '">'
                             + ((city || unknown) + (regionCode ? ', ' + regionCode : '')
-                               + (country ? ', ' + country : '')) + ' ' + ip + ' ' + domain
+                               + (country ? ', ' + country : '')) + ' ' + (ip || '') + ' ' + (longDomain || '')
                             + '</div>' + message;
 
                         logToSpreadsheet(datetime,
