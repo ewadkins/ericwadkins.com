@@ -7,7 +7,8 @@ module.exports = function(title, callback) {
         try {
             request(url, function(err, res, body) {
                 var $ = cheerio.load(body);
-                if ($.text().indexOf('Wikipedia does not have an article with this exact name') !== -1) {
+                if ($.text().indexOf('Wikipedia does not have an article with this exact name') !== -1
+                    || $.text().indexOf('may refer to:') !== -1) {
                     return callback(null);
                 }
                 var desc = null;
