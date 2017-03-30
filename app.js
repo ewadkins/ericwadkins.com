@@ -153,15 +153,8 @@ function create(db) {
             // Never block the request
             setTimeout(function() {
                 
-                console.log('TEST IP: ' + ip);
-                var origip = ip;
                 lookup(ip, function(data) {
                     var ip = data.ip;
-                    if (!ip) {
-                        app.mail('debug@ericwadkins.com', 'GeoIP - Bad IP',
-                                 origip, false, function(success) {
-                        });
-                    }
                     var domain = data.domain;
                     var longDomain = data.longDomain;
                     var entity = data.entity;

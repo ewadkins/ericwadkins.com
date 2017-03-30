@@ -17,10 +17,6 @@ module.exports = function(val, callback) {
     
     if (domain) {
         dnsLookup(domain, function(err, ip) {
-            if (err) {
-                return callback({});
-            }
-            console.log(ip);
             geoLookup(ip, function(geo) {
                 return analyze(ip, domain, geo, callback);
             });
@@ -29,9 +25,6 @@ module.exports = function(val, callback) {
     else {
         geoLookup(ip, function(geo) {
             reverseDnsLookup(ip, function(err, domain) {
-                if (err) {
-                    return callback({});
-                }
                 return analyze(ip, domain, geo, callback);
             });
         });
@@ -44,9 +37,9 @@ function analyze(ip, domain, geo, callback) {
     // Domain parsing
     var longDomain, domain, entity, crawler = false;
     
-    var parsed = domain ? parseDomain(domain) : {};
+    var parsed = domain ? parseDomain(domain) : null;
     longDomain = parsed ? [parsed.subdomain, parsed.domain, parsed.tld]
-        .filter(n => n).join('.') : domains[0];
+        .filter(n => n).join('.') : domain;
     domain = parsed ? [parsed.domain, parsed.tld]
         .filter(n => n).join('.') : null;
     entity = parsed ? parsed.domain.toUpperCase() : null;
@@ -97,15 +90,20 @@ function analyze(ip, domain, geo, callback) {
 }
 
 function geoLookup(ip, callback) {
-    var geo = geoip.lookup(ip);
-    var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
-    if (ipv4Index !== -1) {
-        ip = ip.slice(ipv4Index) || ip;
-        if (!geo) {
-            geo = geoip.lookup(ip);
+    if (ip) {
+        var geo = geoip.lookup(ip);
+        var ipv4Index = ip.search(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/);
+        if (ipv4Index !== -1) {
+            ip = ip.slice(ipv4Index) || ip;
+            if (!geo) {
+                geo = geoip.lookup(ip);
+            }
         }
+        callback(geo);
     }
-    callback(geo);
+    else {
+        callback(null);
+    }
 }
 
 function dnsLookup(domain, callback) {
@@ -120,12 +118,16 @@ function dnsLookup(domain, callback) {
 }
     
 function reverseDnsLookup(ip, callback) {
-    dns.reverse(ip, function(err, domains) {
-        if (err !== null) {
-            callback(err, null);
-        }
-        else {
-            callback(null, domains[0]);
-        }
-   });
+    try {
+        dns.reverse(ip, function(err, domains) {
+            if (err !== null) {
+                callback(err, null);
+            }
+            else {
+                callback(null, domains[0]);
+            }
+       });
+    } catch (err) {
+        callback(err, null);
+    }
 }
