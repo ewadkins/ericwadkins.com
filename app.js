@@ -152,7 +152,7 @@ function create(db) {
         
             // Never block the request
             setTimeout(function() {
-                
+                ip = '18.111.11.34'
                 lookup(ip, function(data) {
                     var ip = data.ip;
                     var domain = data.domain;
@@ -165,7 +165,7 @@ function create(db) {
                     var regionCode = data.regionCode;
                     var regionType = data.regionType;
                     var city = data.city;
-                    var latlong = data.latlong;
+                    var latLong = data.latLong;
                     var range = data.range;
                     
                     wiki((entity || '').toLowerCase(), function(description) {
@@ -174,13 +174,13 @@ function create(db) {
                         var message = '<table>';
                         var styleAttr = 'style="width:80px;padding-right:10px"';
                         var unknown = '(unknown)';
-                        var datetime = new Date().toLocaleTimeString('en-US',
+                        var dateTime = new Date().toLocaleTimeString('en-US',
                                         { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric',
                                          minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true });
 
                         // Add date/time
                         message += '<tr><td ' + styleAttr + '><b> Date/Time </b></td><td>'
-                            + datetime + '</td></tr>';
+                            + dateTime + '</td></tr>';
 
                         // Add target
                         path = path || '/';
@@ -218,7 +218,7 @@ function create(db) {
                                 + (regionStr || unknown) + '</td></tr>'
                                 + '<tr><td ' + styleAttr + '><b> City </b></td><td>'
                                 + (city || unknown) + '</td></tr>'
-                                + '<tr><td ' + styleAttr + '><b> Lat./Long. </b></td><td><a href="http://maps.google.com/?q=' + latlong + '">'+ latlong + '</a></td></tr>';
+                                + '<tr><td ' + styleAttr + '><b> Lat./Long. </b></td><td><a href="http://maps.google.com/?q=' + latLong + '">'+ latLong + '</a></td></tr>';
                         }
                         else {
                             message += '<tr><td ' + styleAttr + '><b>GeoIP Lookup</b></td><td><i>Lookup failed</i></td></tr>';
@@ -234,14 +234,24 @@ function create(db) {
                                + (country ? ', ' + country : '')) + ' ' + (ip || '') + ' ' + (longDomain || '')
                             + '</div>' + message;
 
-                        logToSpreadsheet(datetime,
-                                         ip,
-                                         longDomain || '',
-                                         country || '',
-                                         region || '',
-                                         city || '',
-                                         latlong || '',
-                                         crawler ? 'yes' : 'no');
+                        // Log to spreadsheet
+                        logToSpreadsheet(
+                            dateTime,
+                            path,
+                            ip || '',
+                            domain || '',
+                            longDomain || '',
+                            entity || '',
+                            crawler !== null ? crawler : '',
+                            country || '',
+                            countryCode || '',
+                            region || '',
+                            regionCode || '',
+                            regionType || '',
+                            city || '',
+                            latLong || '',
+                            range || ''
+                        );
 
                         app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (countryCode ? '[' + countryCode + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
                                  message, true, function(success) {
@@ -258,25 +268,33 @@ function create(db) {
         next();
     });
     
-    function logToSpreadsheet(datetime, ip, dnsReverseLookup, country, region, city, latitudeLongitude, crawler) {
+    function logToSpreadsheet(dateTime, path, ip, domain, longDomain, entity, crawler, country, countryCode, region, regionCode, regionType, city, latLong, range) {
         // GeoIP Tracker submission function
         var formid = process.env.FORM_ID;
         if (formid) {
             var data = {
-                "entry.1453902602": datetime,
-                "entry.1765119119": ip,
-                "entry.1581364175": dnsReverseLookup,
-                "entry.403197258": country,
-                "entry.1992079491": region,
-                "entry.1849033215": city,
-                "entry.1543205328": latitudeLongitude,
-                "entry.549135233": crawler
+                "entry.1395352981": dateTime,
+                "entry.533438788": path,
+                "entry.1818755280": ip,
+                "entry.1547476546": domain,
+                "entry.1208339100": longDomain,
+                "entry.950158622": entity,
+                "entry.421791136": crawler,
+                "entry.1499749132": country,
+                "entry.678326523": countryCode,
+                "entry.1839257608": region,
+                "entry.520002102": regionCode,
+                "entry.1705355953": regionType,
+                "entry.169013684": city,
+                "entry.966262772": latLong,
+                "entry.1517919849": range
             };
             var params = [];
             for (key in data) {
                 params.push(key + "=" + encodeURIComponent(data[key]));
             }
             var url = "https://docs.google.com/forms/d/" + formid + "/formResponse?" + params.join("&");
+            console.log(url);
             request(url, function (error, response, body) {
             });
         }

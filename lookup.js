@@ -46,7 +46,7 @@ function analyze(ip, domain, geo, callback) {
     crawler = /(crawl|spider|bot)[\.-]/.test(longDomain);
 
     // GeoIP lookup
-    var country, countryCode, region, regionCode, regionType, city, latlong, range;
+    var country, countryCode, region, regionCode, regionType, city, latLong, range;
     
     geo = geo || {};
     countryCode = geo.country || null;
@@ -70,7 +70,7 @@ function analyze(ip, domain, geo, callback) {
         range[0] = geoip.pretty(range[0]);
         range[1] = geoip.pretty(range[1]);
     }
-    latlong = geo.ll || null;
+    latLong = geo.ll || null;
 
     callback({
         ip: ip,
@@ -84,7 +84,7 @@ function analyze(ip, domain, geo, callback) {
         regionCode: regionCode,
         regionType: regionType,
         city: city,
-        latlong: latlong,
+        latLong: latLong,
         range: range
     });
 }

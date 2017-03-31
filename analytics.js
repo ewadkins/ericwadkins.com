@@ -51,14 +51,21 @@ if (require.main === module) { // If called from command line directly
 
 var dataLabels = {
     timestamp: 'timestamp',
-    'date': 'date/time',
-    ip: 'ip address',
-    lookup: 'dns reverse lookup',
+    date: 'date/time',
+    path: 'path',
+    ip: 'ip',
+    domain: 'domain',
+    longDomain: 'long domain',
+    entity: 'entity',
+    crawler: 'crawler?',
     country: 'country',
+    countryCode: 'country code',
     region: 'region',
+    regionCode: 'region code',
+    regionType: 'regionType',
     city: 'city',
-    ll: 'latitude/longitude',
-    crawler: 'crawler?'
+    latLong: 'lat./long.',
+    range: 'range'
 };
 
 function run(args, callback) {
@@ -73,23 +80,7 @@ function run(args, callback) {
                     obj[label] = rows[i][dataLabels[label]];
                 }
             }
-            obj.cityRegionCountry = (obj.city || unknown) + (obj.region ? ', ' + obj.region : '') + (obj.country ? ', ' + obj.country : '');
-            obj.regionCountry = (obj.region || unknown) + (obj.country ? ', ' + obj.country : '');
-            var ccMatches = /^[^()]+\(([^()]*)\)/.exec(obj.country);
-            obj.country = obj.country || unknown;
-            obj.region = obj.region || unknown;
-            obj.city = obj.city || unknown;
-            obj.countryCode = ccMatches ? ccMatches[1] : obj.country;
-            obj.date = new Date(obj.date);
-            obj.crawler = obj.crawler === 'yes';
-            obj.domain = unknown;
-            obj.tld = '';
-            if (obj.lookup) {
-                var parsedDomain = parseDomain(obj.lookup);
-                obj.domain = parsedDomain.domain + '.' + parsedDomain.tld;
-                obj.tld = parsedDomain.tld;
-            }
-
+            
             var filtered = false;
             for (var key in args) {
                 if (args.hasOwnProperty(key)) {
@@ -99,6 +90,28 @@ function run(args, callback) {
                 }
             }
             if (!filtered) {
+                // Make changes for analysis and display
+                
+                // New fields
+                obj.cityRegionCountry = (obj.city || unknown) + ((obj.region || obj.regionCode) ? ', ' + (obj.region || obj.regionCode) : '') + ((obj.country || obj.countryCode) ? ', ' + (obj.country || obj.countryCode) : '');
+                obj.regionCountry = ((obj.region || obj.regionCode) || unknown) + ((obj.country || obj.countryCode) ? ', ' + (obj.country || obj.countryCode) : '');
+                
+                // Modify existing fields
+                obj.date = new Date(obj.date);
+                obj.ip = obj.ip || unknown;
+                obj.domain = obj.domain || unknown;
+                obj.longDomain = obj.longDomain || unknown;
+                obj.entity = obj.entity || unknown;
+                obj.crawler = obj.crawler.toLowerCase() === 'true';
+                obj.country = obj.country || unknown;
+                obj.countryCode = obj.countryCode || unknown;
+                obj.region = obj.region || unknown;
+                obj.regionCode = obj.regionCode || unknown;
+                obj.regionType = obj.regionType || unknown;
+                obj.city = obj.city || unknown;
+                obj.latLong = obj.latLong || unknown;
+                obj.range = obj.range || unknown;
+                
                 parsed.push(obj);
             }
         }
