@@ -84,7 +84,8 @@ function run(args, callback) {
             var filtered = false;
             for (var key in args) {
                 if (args.hasOwnProperty(key)) {
-                    if ((obj[key] !== undefined) && obj[key].toString().indexOf(args[key]) === -1) {
+                    if ((obj[key] !== undefined) && obj[key].toString().toLowerCase()
+                            .indexOf(args[key].toLowerCase()) === -1) {
                         filtered = true;
                     }
                 }
