@@ -210,7 +210,7 @@ function sortObjectByValue(obj) {
             valueKeyPairs.push([obj[field], field]);
         }
     }
-    valueKeyPairs.sort();
+    valueKeyPairs.sort((a, b) => a - b);
     valueKeyPairs.reverse();
     var newObj = {};
     for (var i = 0; i < valueKeyPairs.length; i++) {
