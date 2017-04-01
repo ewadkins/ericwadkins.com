@@ -14,7 +14,7 @@ module.exports = function(title, callback) {
                 }
                 var desc = null;
                 try {
-                    desc = $('#mw-content-text p').first().text().replace(/\[[0-9]+\]/g, '');
+                    desc = $('#mw-content-text > p').first().text().replace(/\[[0-9]+\]/g, '');
                 } finally {
                     callback(desc);
                 }
