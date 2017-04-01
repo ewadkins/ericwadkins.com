@@ -208,8 +208,8 @@ function create(db) {
 
                         // Add GeoIP info
                         if (countryCode) {
-                            countryStr = (country ? country + ' (' + countryCode + ')' : country) || '';
-                            regionStr = (region ? region + ' (' + regionCode + ')' : region) || '';
+                            countryStr = (country ? country + ' (' + countryCode + ')' : countryCode) || '';
+                            regionStr = (region ? region + ' (' + regionCode + ')' : regionCode) || '';
                             message += '<tr><td ' + styleAttr + '><b> Range </b></td><td>'
                                 + (range ? range.join(' - ') : unknown) + '</td></tr>'
                                 + '<tr><td ' + styleAttr + '><b> Country </b></td><td>'
