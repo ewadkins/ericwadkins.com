@@ -121,7 +121,7 @@ function create(db) {
 
 	// Add GeoIP tracker
     var recentMap = {};
-    var timeGranularity = 5; // 5 seconds (absorbs bursts of requests from a single page)
+    var timeGranularity = 10; // 10 seconds (absorbs bursts of requests from a single page)
     app.use(function(req, res, next) {
         // Get ip
         var ip = req.headers["X-Forwarded-For"]
