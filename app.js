@@ -116,6 +116,7 @@ function create(db) {
     
     var untracked = [
         '/vid', // videos load dynamically and may send many requests
+        '/favicon.ico', // sometimes automatically attempts to load the favicon
         '/analytics'
     ];
 
