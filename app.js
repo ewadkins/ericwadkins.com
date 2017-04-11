@@ -295,7 +295,6 @@ function create(db) {
                 params.push(key + "=" + encodeURIComponent(data[key]));
             }
             var url = "https://docs.google.com/forms/d/" + formid + "/formResponse?" + params.join("&");
-            console.log(url);
             request(url, function (error, response, body) {
             });
         }
