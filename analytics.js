@@ -18,7 +18,7 @@ module.exports = { run: function(argv, callback) {
         // Returns html output
         var bootstrapCss = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">';
         var bootstrapJs = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>';
-        var style = '<style>body{background:black;font-family:monospace;font-size:9pt} .row{margin-left:15px;margin-right:15px;margin-top:15px;margin-bottom:15px} .data div{padding:15px;background:#101010;max-height:35000px;overflow-y:auto;overflow-x:hidden} .data{margin-top:15px;margin-bottom:15px;display:inline!important} .header{margin:0px;margin-top:15px}</style>';
+        var style = '<style>body{background:black;font-family:monospace;font-size:9pt} .row{margin-left:15px;margin-right:15px;margin-top:15px;margin-bottom:15px} .data div{padding:15px;background:#101010;max-height:35000px;overflow-y:auto;overflow-x:hidden} .data{margin-top:15px;margin-bottom:15px} .header{margin:0px;margin-top:15px}</style>';
         var html = bootstrapJs + bootstrapCss + style;
         var parts = output.split('\n\n');
         
@@ -35,7 +35,7 @@ module.exports = { run: function(argv, callback) {
         html += '<div class="row">';
         for (var i = 2; i < parts.length; i++) {
             html += '<div class="col-lg-4 col-md-6 col-sm-12 data"><div>'
-            html += convert.toHtml(parts[i].trim().replace(/ /g, '&nbsp;').replace(/\n/g, '<br>'));
+            html += convert.toHtml(parts[i].trim().replace(/ /g, '&nbsp;').replace(/\n/g, '<br>').replace());
             html += '<br>';
             html += '</div></div>'
         }
