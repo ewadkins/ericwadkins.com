@@ -16,8 +16,32 @@ module.exports = { run: function(argv, callback) {
     }
     run(args, function(output) {
         // Returns html output
-        var style = '<style>*{background:black;font-family:monospace}</style>';
-        callback(style + convert.toHtml(output.replace(/ /g, '&nbsp;').replace(/\n/g, '<br>')));
+        var bootstrapCss = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">';
+        var bootstrapJs = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>';
+        var style = '<style>body{background:black;font-family:monospace;font-size:9pt} .row{margin-left:15px;margin-right:15px;margin-top:15px;margin-bottom:15px} .data div{padding:15px;background:#101010;max-height:35000px;overflow-y:auto;overflow-x:hidden} .data{margin-top:15px;margin-bottom:15px;display:inline!important} .header{margin:0px;margin-top:15px}</style>';
+        var html = bootstrapJs + bootstrapCss + style;
+        var parts = output.split('\n\n');
+        
+        html += '<div class="row"><div class="col-xs-12 data header"><div>';
+        for (var i = 0; i < 2; i++) {
+            if (i != 0) {
+                html += '<br>';
+            }
+            html += convert.toHtml(parts[i].trim().replace(/ /g, '&nbsp;').replace(/\n/g, '<br>'));
+            html += '<br>';
+        }
+        html += '</div></div></div>';
+        
+        html += '<div class="row">';
+        for (var i = 2; i < parts.length; i++) {
+            html += '<div class="col-lg-4 col-md-6 col-sm-12 data"><div>'
+            html += convert.toHtml(parts[i].trim().replace(/ /g, '&nbsp;').replace(/\n/g, '<br>'));
+            html += '<br>';
+            html += '</div></div>'
+        }
+        html += '</div>';
+        
+        callback(html);
     });
 }};
 
@@ -45,6 +69,7 @@ if (require.main === module) { // If called from command line directly
     }
 
     run(args, function(output) {
+        console.log(output.split('\n\n')[0])
         console.log(output);
     });
 }
@@ -138,12 +163,12 @@ function analyze(parsed, args) {
     results.minDate = minDate;
     results.counts = {};
     var countFieldMap = {
-        country: 'country',
-        region: 'regionCountry',
         city: 'cityRegionCountry',
+        region: 'regionCountry',
+        country: 'country',
+        'crawler? (best guess)': 'crawler',
         domain: 'domain',
-        path: 'path',
-        'crawler? (best guess)': 'crawler'
+        //path: 'path',
     }
     for (var countField in countFieldMap) {
         if (countFieldMap.hasOwnProperty(countField)) {
