@@ -125,10 +125,16 @@ function create(db) {
     var timeGranularity = 10; // 10 seconds (absorbs bursts of requests from a single page)
     app.use(function(req, res, next) {
         // Get ip
-        var ip = req.headers["X-Forwarded-For"]
+        var ips = req.headers["X-Forwarded-For"]
                                     || req.headers["x-forwarded-for"]
                                     || req.client.remoteAddress
                                     || '';
+        var singleIp = ips;
+        var parts = ips.split(',');
+        if (parts.length > 1) {
+            singleIp = parts[0].trim();
+        }
+        
         // Remove expired ips
         for (var field in recentMap) {
             if (recentMap.hasOwnProperty(field)) {
@@ -139,8 +145,8 @@ function create(db) {
         }
         
         // If not a followup request
-        if (!recentMap[ip]) {
-            recentMap[ip] = new Date();
+        if (!recentMap[singleIp]) {
+            recentMap[singleIp] = new Date();
             
             // Don't record visits to untracked paths
             for (var i = 0; i < untracked.length; i++) {
@@ -154,8 +160,8 @@ function create(db) {
             // Never block the request
             setTimeout(function() {
 
-                lookup(ip, function(data) {
-                    var ip = data.ip;
+                lookup(singleIp, function(data) {
+                    var ip = ips;
                     var domain = data.domain;
                     var longDomain = data.longDomain;
                     var entity = data.entity;
