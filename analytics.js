@@ -142,6 +142,8 @@ function analyze(parsed, args) {
         region: 'regionCountry',
         city: 'cityRegionCountry',
         domain: 'domain',
+        path: 'path',
+        'crawler? (best guess)': 'crawler'
     }
     for (var countField in countFieldMap) {
         if (countFieldMap.hasOwnProperty(countField)) {
