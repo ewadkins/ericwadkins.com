@@ -24,7 +24,7 @@ module.exports = { run: function(argv, callback) {
         
         html += '<div class="row"><div class="col-xs-12 data header"><div>';
         for (var i = 0; i < 2; i++) {
-            if (i != 0) {
+            if (i !== 0) {
                 html += '<br>';
             }
             html += convert.toHtml(parts[i].trim().replace(/ /g, '&nbsp;').replace(/\n/g, '<br>'));
@@ -212,7 +212,7 @@ function display(results) {
                     countStr += ' ';
                 }
                 countStr += countLabel;
-                output += ('\n' + chalk.green(countStr) + '  ' + chalk.cyan(countField.toUpperCase())) + '\n';
+                output += ('\n' + chalk.green(countStr) + '  ' + chalk.cyan(countField.toUpperCase())) + '\n\t\n';
                 for (var key in results.counts[countField]) {
                     if (results.counts[countField].hasOwnProperty(key)) {
                         var value = results.counts[countField][key];
@@ -220,7 +220,7 @@ function display(results) {
                         for (var i = 0; i < valueLength - value.toString().length; i++) {
                             valueStr += ' ';
                         }
-                        valueStr += value;
+                        valueStr += chalk.bold(value);
                         output += (valueStr + '  ' + key) + '\n';
                     }
                 }
