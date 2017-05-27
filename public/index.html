@@ -20,6 +20,7 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="academicons-1.8.0/css/academicons.min.css" rel="stylesheet" type="text/css">-->
     <link href="font-mfizz-2.2/font-mfizz.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
@@ -67,10 +68,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
+                        <a class="page-scroll" href="#papers">Papers</a>
+                    </li>
+                    <li>
                         <a class="page-scroll" href="#skills">Skills</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                        <a class="page-scroll" href="#portfolio">Projects</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#timeline">Timeline</a>
@@ -100,10 +104,34 @@
                 </div>
                 <div class="intro-lead-in">Welcome To My Portfolio!</div>
                 <div class="intro-heading">Eric Wadkins</div>
-                <a href="#skills" class="page-scroll btn btn-xl">Show Me More</a>
+                <a href="#papers" class="page-scroll btn btn-xl">Show Me More</a>
             </div>
         </div>
     </header>
+
+    <!-- Papers Section -->
+    <section id="papers" class="bg-light-gray short">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Papers</h2>
+                </div>
+            </div>
+            <br>
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <a href="doc/Computer_Vision_Tools_NV_Centers.pdf" target="blank"><i class="fa fa-file-pdf-o"></i> Computer Vision Tools for Location Nitrogen-Vacancy Centers</a>
+                    <p class="text-muted"><b>Eric Wadkins</b>, Michael Walsh, Dirk Englund. 2017<br><a href="https://www.academia.edu/33213392/Computer_Vision_Tools_for_Locating_Nitrogen-Vacancy_Centers" target="blank">Academia.edu</a> | <a href="doc/Computer_Vision_Tools_NV_Centers.pdf" download="Computer_Vision_Tools_NV_Centers.pdf">Download <i class="fa fa-download"></i></a></p>
+                </div>
+                <br><br><br><hr>
+                <div class="col-lg-12">
+                    <a href="doc/Utility_Programs_NV_Centers.pdf" target="blank"><i class="fa fa-file-pdf-o"></i> Utility Programs for Nitrogen-Vacancy Center
+Identification and Initialization Analysis</a> (contributor, &sect;2)
+                    <p class="text-muted">Aaron Vontell, Michael Walsh, <b>Eric Wadkins</b>, Dirk Englund. 2017<br><a href="https://www.academia.edu/31449928/Winter_2017_Project_Summary_-_Utility_programs_for_nitrogen-vacancy_center_identification_and_initialization_analysis" target="blank">Academia.edu</a> | <a href="doc/Utility_Programs_NV_Centers.pdf" download="Utility_Programs_NV_Centers.pdf">Download <i class="fa fa-download"></i></a>)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Skills Section -->
     <section id="skills">
@@ -121,7 +149,16 @@
                         <i class="fa fa-share-alt fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Machine Learning & Artificial Intelligence</h4>
-                    <p class="text-muted">I've worked on many projects involving machine learning and AI. This includes projects in a research laboratory setting as well as personal projects. A few examples are my experimentation with <a href="https://github.com/ewadkins/NeuralNets" target="blank">neural networks</a> and my <a href="https://github.com/ewadkins/RayCastingSimulation" target="blank">Raycasting simulation</a>.</p>
+                    <p class="text-muted">I've worked on many projects involving machine learning and AI. This includes projects in a research laboratory setting, such as developing the NN model presented in <a href="doc/Utility_Programs_NV_Centers.pdf" target="blank">Utility Programs for Nitrogen-Vacancy Center Identiﬁcation and Initialization Analysis</a>. Some of my personal projects include my experimentation with <a href="https://github.com/ewadkins/NeuralNets" target="blank">neural networks</a> in Tensorflow and my <a href="https://github.com/ewadkins/RayCastingSimulation" target="blank">Raycasting simulation</a>.</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-dot-circle-o fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Computer Vision & OpenGL/OpenCV</h4>
+                    <p class="text-muted">I have significant research experience in the field of computer vision, including <a href="doc/Computer_Vision_Tools_NV_Centers.pdf" target="blank">Computer Vision Tools for Locating Nitrogren-Vacancy Centers</a>. I've also created dozens of programs using CV and graphics libraries such as OpenGL and OpenCV. This includes my <a href="https://github.com/ewadkins/ObjectTracker" target="blank">Object Tracker</a>, <a href="https://github.com/ewadkins/CollageGenerator" target="blank">Collage Generator</a>, <a href="https://github.com/ewadkins/OpenGLGameEngine" target="blank">Game Engine</a>, <a href="https://github.com/ewadkins/RayCastingSimulation" target="blank">Raycasting simulation</a>, and many more.</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -130,14 +167,6 @@
                     </span>
                     <h4 class="service-heading">C++</h4>
                     <p class="text-muted">I have over <strong>4 years</strong> of experience programming in C++. My C++ projects include a <a href="https://github.com/ewadkins/OpenGLGameEngine" target="blank">custom game engine</a> using the OpenGL graphics library, and many other projects relating to machine learning and computer vision using the OpenCV computer vision library.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-dot-circle-o fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Computer Vision & OpenGL/OpenCV</h4>
-                    <p class="text-muted">I have created dozens of programs using computer vision and graphics libraries such as OpenGL and OpenCV. This includes my <a href="https://github.com/ewadkins/ObjectTracker" target="blank">Object Tracker</a>, <a href="https://github.com/ewadkins/CollageGenerator" target="blank">Collage Generator</a>, <a href="https://github.com/ewadkins/OpenGLGameEngine" target="blank">Game Engine</a>, <a href="https://github.com/ewadkins/RayCastingSimulation" target="blank">Raycasting simulation</a>, and many more.</p>
                 </div>
             </div>
             <div class="row text-center">
@@ -208,7 +237,7 @@
 	                <div class="intro-text">
 	                    <a href="/resume" target="blank" style="margin-bottom:15px" class="page-scroll btn btn-xl"><i class="fa fa-file-pdf-o"></i> Resume</a>
 	                </div>
-                    <a href="/resume"download="Resume - Eric Wadkins"><i class="fa fa-download"></i> Download</a>
+                    <a href="/resume" download="Resume - Eric Wadkins.pdf"><i class="fa fa-download"></i> Download</a>
 	            </div>
             </div>
         </div>
@@ -219,8 +248,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Some of my projects...</h3>
+                    <h2 class="section-heading">Projects</h2>
+                    <h3 class="section-subheading text-muted">Some of my personal projects...</h3>
                 </div>
             </div>
             <div class="row">
@@ -422,7 +451,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h3 class="section-subheading text-muted" style="margin-bottom:25px">To see more, visit my GitHub profile: <a href="https://github.com/ewadkins" target="blank">https://github.com/ewadkins</a></h3>
-                    <div class="github-card" data-github="ewadkins" data-width="400" data-height="150" data-theme="default"></div>
+                    <!--<div class="github-card" data-github="ewadkins" data-width="400" data-height="150" data-theme="default"></div>-->
                 </div>
             </div>
         </div>
@@ -470,7 +499,7 @@
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/laptop2.jpg" alt="Software Engineer Intern at Diameter Health">
+                                <img class="img-circle img-responsive" src="img/diameterhealth_square.png" alt="Software Engineer Intern at Diameter Health">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -502,7 +531,7 @@
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2017</h4>
+                                    <h4>2017 - Present</h4>
                                     <h4 class="subheading"><a href="http://www.rle.mit.edu/" target="blank">Research Laboratory of Electronics</a>, MIT</h4>
                                 </div>
                                 <div class="timeline-body">
@@ -511,6 +540,20 @@
                             </div>
                         </li>
                         <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/google_square.png" alt="Google">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>2017 - Present</h4>
+                                    <h4 class="subheading"><a href="http://google.com/" target="blank">Google</a>, Los Angeles</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">For the duration of Summer 2017, I will be a Software Engineering Intern at Google in their Venice, Los Angeles office.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
                             <div class="timeline-image">
                                 <img class="img-circle img-responsive" src="img/laptop.jpg" alt="Personal Projects">
                             </div>
@@ -527,7 +570,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <a href="#contact" class="page-scroll">
-                                <div class="timeline-image">
+                                <div class="timeline-image green">
                                     <h4>Be Part
                                     <br>Of My
                                     <br>Story!</h4>
@@ -595,6 +638,9 @@
             		<a href="http://www.rle.mit.edu/" target="blank" class="client-link">
             			<img class="center-block" src="img/rle.png" alt="Research Laboratory of Electronics (RLE)">
             		</a>
+            		<a href="http://google.com/" target="blank" class="client-link">
+            			<img class="center-block" src="img/google.png" alt="Diameter Health">
+            		</a>
             		<a href="http://diameterhealth.com/" target="blank" class="client-link">
             			<img class="center-block" src="img/diameterhealth2.png" alt="Diameter Health">
             		</a>
@@ -609,7 +655,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Contact Me</h2>
-                    <h3 class="contact-info">Email: <a href="mailto:ewadkins@mit.edu">ewadkins@mit.edu</a> | <a href="mailto:info@ericwadkins.com">info@ericwadkins.com</a></h3>
+                    <h3 class="contact-info">Email: <a href="mailto:ewadkins@mit.edu">ewadkins@mit.edu</a> | <a href="mailto:info@ericwadkins.com">eric@ericwadkins.com</a></h3>
                     <h3 class="contact-info">Address: <a href="https://www.google.com/maps/place/229+Vassar+St,+Cambridge,+MA+02139" target="blank">Simmons Hall. 229 Vassar St., Cambridge, MA 02139</a></h3>
                     <h3 class="contact-info">Phone: <a href="tel:6178395035">(617) 839-5035</a></h3>
                     <h3 class="section-subheading text-muted">...or use the following form</h3>

@@ -448,6 +448,9 @@ section h3.section-subheading {
     left: -14px;
     right: auto
 }
+.timeline>li .timeline-image.green {
+    background-color: #5cb85c;
+}
 .timeline>li .timeline-image {
     left: 0;
     margin-left: 0;
@@ -455,7 +458,7 @@ section h3.section-subheading {
     height: 80px;
     position: absolute;
     z-index: 100;
-    background-color: #5cb85c;
+    background-color: #ffffff;
     color: #fff;
     border-radius: 100%;
     border: 7px solid #f1f1f1;
@@ -752,11 +755,11 @@ ul.social-buttons li a:active {
 }
 ::-moz-selection {
     text-shadow: none;
-    background: #5cb85c
+    background: #9ce89c; /*5cb85c*/
 }
 ::selection {
     text-shadow: none;
-    background: #5cb85c
+    background: #9ce89c; /*5cb85c*/
 }
 img::selection {
     background: 0 0
@@ -776,11 +779,20 @@ body {
 .client-link {
     display: inline-block;
     vertical-align: middle;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .client-link img {
     max-width: 300px;
-    max-height: 100px;
+    max-height: 70px;
+}
+
+section.short {
+    padding-top: 108px;
+    padding-bottom: 108px;
+}
+
+section#papers {
+    font-size: 12pt;
 }
