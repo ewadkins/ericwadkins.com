@@ -122,7 +122,9 @@ function create(db) {
 
 	// Add GeoIP tracker
     var recentMap = {};
-    var timeGranularity = 10; // 10 seconds (absorbs bursts of requests from a single page)
+    var robotsMap = {};
+    var recentGranularity = 10; // 10 seconds (absorbs bursts of requests from a single page)
+    var robotsGranularity = 3600; // 1 hour (remembers crawlers that read robots.txt)
     app.use(function(req, res, next) {
         // Get ip
         var ips = req.headers["X-Forwarded-For"]
@@ -135,13 +137,25 @@ function create(db) {
             singleIp = parts[0].trim();
         }
         
-        // Remove expired ips
+        // Remove expired
         for (var field in recentMap) {
             if (recentMap.hasOwnProperty(field)) {
-                if (new Date().getTime() - new Date(recentMap[field]).getTime() > timeGranularity * 1000) {
+                if (new Date().getTime() - new Date(recentMap[field]).getTime() > recentGranularity * 1000) {
                     delete recentMap[field];
                 }
             }
+        }
+        for (var field in robotsMap) {
+            if (robotsMap.hasOwnProperty(field)) {
+                if (new Date().getTime() - new Date(robotsMap[field]).getTime() > robotsGranularity * 1000) {
+                    delete robotsMap[field];
+                }
+            }
+        }
+        
+        var path = req.path;
+        if (path === '/robots.txt') {
+            robotsMap[singleIp] = new Date();
         }
         
         // If not a followup request
@@ -150,12 +164,10 @@ function create(db) {
             
             // Don't record visits to untracked paths
             for (var i = 0; i < untracked.length; i++) {
-                if (req.path.indexOf(untracked[i]) === 0) {
+                if (path.indexOf(untracked[i]) === 0) {
                     return next();
                 }
             }
-            
-            var path = req.path;
         
             // Never block the request
             setTimeout(function() {
@@ -165,7 +177,7 @@ function create(db) {
                     var domain = data.domain;
                     var longDomain = data.longDomain;
                     var entity = data.entity;
-                    var crawler = data.crawler;
+                    var crawler = data.crawler || (robotsMap[singleIp] || false);
                     var country = data.country;
                     var countryCode = data.countryCode;
                     var region = data.region;
