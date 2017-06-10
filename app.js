@@ -214,15 +214,16 @@ function create(db) {
                                 + (domain || unknown) + '</td></tr>';
                             message += '<tr><td ' + styleAttr + '><b> Entity </b></td><td>'
                                 + (entity || unknown) + '</td></tr>';
-                            message += '<tr><td ' + styleAttr + '><b> Crawler? </b></td><td>'
-                                + (crawler ? 'Yes' : 'No') + '</td></tr>';
-
-                            // Add wiki description
-                            message += '<tr><td ' + styleAttr + '><b>Description</b></td><td>'
-                                + description + '</td></tr>';
                         }
                         else {
                             message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
+                        }
+                        message += '<tr><td ' + styleAttr + '><b> Crawler? </b></td><td>'
+                            + (crawler ? 'Yes' : 'No') + '</td></tr>';
+                        if (domain) {
+                            // Add wiki description
+                            message += '<tr><td ' + styleAttr + '><b>Description</b></td><td>'
+                                + description + '</td></tr>';
                         }
 
                         // Add GeoIP info
