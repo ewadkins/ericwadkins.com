@@ -16,7 +16,7 @@ var config = {
 			schedule: 'schedule.html',
 			resume: 'doc/Resume - Eric Wadkins 2017.pdf',
             signature: 'img/signature_transparent.png',
-            
+            map: 'map.html',
 			dashboard: 'dashboard/index.html',
 			collage: 'dashboard/collage/index.html',
 			gas: 'dashboard/gas/index.html',

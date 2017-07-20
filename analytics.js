@@ -9,7 +9,9 @@ require('dotenv').config();
 
 var unknown = '(unknown)';
 
-module.exports = { run: function(argv, callback) {
+module.exports = { run: runHandle, getLocationData: getLocationData };
+                  
+function runHandle(argv, callback) {
     var args = {};
     for (var key in argv) {
         if (argv.hasOwnProperty(key)) {
@@ -44,7 +46,7 @@ module.exports = { run: function(argv, callback) {
         
         callback(html);
     });
-}};
+}
 
 var url = process.env.FORM_DATA_URL;
 
@@ -94,7 +96,7 @@ var dataLabels = {
     range: 'range'
 };
 
-function run(args, callback) {
+function getData(args, callback) {
     request(url, function (error, response, body) {
         var rows = csv.toJSON(body, { headers: { included: true } });
         var parsed = [];
@@ -141,10 +143,22 @@ function run(args, callback) {
                 parsed.push(obj);
             }
         }
+        callback(parsed);
+    });
+}
+
+function run(args, callback) {
+    getData(args, function(parsed) {
         var results = analyze(parsed, args);
         var output = display(results);
-        
         callback(output);
+    });
+}
+
+// Used for analytics map backend
+function getLocationData(args, callback) {
+    getData(args, function(parsed) {
+        callback(parsed);
     });
 }
 
