@@ -2,9 +2,9 @@ $(function() {
     $.get("api/viewdata" + window.location.search, function(data) {
         $('#loadingNotice').remove();
         var locations = data
-                        .map(function(x) { return x.latLong })
-                        .filter(function(x) { return x !== '(unknown)' })
-                        .map(function(x) { return [''].concat(x.split(',').map(parseFloat).map(perturb)) });
+                        .map(function(x) { return { loc: x.latLong, text: '<b>' + x.cityRegionCountry + '</b><br>' + '<a target="blank" href="http://maps.google.com/?q=' + x.latLong + '">' + x.latLong.replace(',', ',  ') + '</a><br><br><b>' + x.ip + '</b><br>' + x.range.replace(',', ' - ') + '<br>' + (x.domain !== '(unknown)' ? x.domain + ' (' + x.longDomain + ')' : '(unknown domain)') + (x.crawler == true ? '<br>' + '<i>LIKELY A WEB CRAWLER</i>' : '') + '<br><br><b>' + new Date(x.date).toLocaleTimeString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short', hour12: true }) + '</b><br>ericwadkins.com' + x.path }})
+                        .filter(function(x) { return x.loc !== '(unknown)' })
+                        .map(function(x) { return [x.text].concat(x.loc.split(',').map(parseFloat).map(perturb)) });
         mapLocations(locations);
     });
 });
