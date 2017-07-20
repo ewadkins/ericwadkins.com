@@ -1,4 +1,5 @@
 $(function() {
+    resize();
     $.get("api/viewdata" + window.location.search, function(data) {
         $('#loadingNotice').remove();
         var locations = data
@@ -7,7 +8,14 @@ $(function() {
                         .map(function(x) { return [x.text].concat(x.loc.split(',').map(parseFloat).map(perturb)) });
         mapLocations(locations);
     });
+    
+    $(window).on('resize', resize);
 });
+
+function resize() {
+    $('#map').width($(window).width());
+    $('#map').height($(window).height());
+}
 
 function approximateBellCurve() {
     return (Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random()) / 6;
