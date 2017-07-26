@@ -119,7 +119,7 @@ function create(db) {
         '/favicon.ico', // sometimes automatically attempts to load the favicon
         '/analytics',
         '/a', // analytics short link
-        '/map'
+        '/map',
         '/m' // map short link
     ];
 
