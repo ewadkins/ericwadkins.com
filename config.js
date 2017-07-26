@@ -21,9 +21,7 @@ var config = {
 			dashboard: 'dashboard/index.html',
 			collage: 'dashboard/collage/index.html',
 			gas: 'dashboard/gas/index.html',
-            analytics: 'analytics',
             map: 'map.html',
-			viewdata: 'api/viewdata',
 		},    
 		db: {
 			hostname: 'ds059165.mongolab.com',

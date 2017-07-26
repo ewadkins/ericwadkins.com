@@ -6,11 +6,11 @@ var router = express.Router();
 module.exports = function(db, logger){
 
 	router.get('/s', function(req, res, next) {
-		res.redirect(path.join('/', config.server.schedule));
+		res.redirect('/schedule');
 	});
 
 	router.get('/r', function(req, res, next) {
-		res.redirect(path.join('/', config.server.resume));
+		res.redirect('/resume');
 	});
 
 	router.get('/p/1', function(req, res, next) {
@@ -22,19 +22,19 @@ module.exports = function(db, logger){
 	});
 
 	router.get('/d', function(req, res, next) {
-		res.redirect(path.join('/', config.server.dashboard));
+		res.redirect('/dashboard');
 	});
 
 	router.get('/a', function(req, res, next) {
-		res.redirect(path.join('/', config.server.analytics));
+		res.redirect('/analytics');
 	});
 
 	router.get('/m', function(req, res, next) {
-		res.redirect(path.join('/', config.server.map));
+		res.redirect('/map');
 	});
 
 	router.get('/vd', function(req, res, next) {
-		res.redirect(path.join('/', config.server.viewdata));
+		res.redirect('/api/viewdata');
 	});
 	
 	return router;
