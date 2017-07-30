@@ -73,7 +73,7 @@ function mapLocations(locations) {
         }
     });
     
-    google.maps.event.addListener(markerCluster, 'clusterclick', function(cluster) {
+    google.maps.event.addListener(markerClusterer, 'clusterclick', function(cluster) {
         previousZoomLevel = map.getZoom();
         clusterClickTriggeredZoom = true;
     });
