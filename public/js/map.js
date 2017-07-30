@@ -25,28 +25,57 @@ function perturb(x) {
     return x + 0.001 * (approximateBellCurve() - 0.5);
 }
 
+var map, markerClusterer;
 function mapLocations(locations) {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 3,
         center: new google.maps.LatLng(39.8104592,-101.2962492),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
     var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-
-    for (i = 0; i < locations.length; i++) { 
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+    
+    var markers = locations.map(function (location, i) {
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(location[1], location[2]),
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 7,
+                fillColor: 'red',
+                fillOpacity: 1.0,
+                strokeOpacity: 0.10,
+            },
             map: map
         });
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function() {
-                infowindow.setContent(locations[i][0]);
+                infowindow.setContent(location[0]);
                 infowindow.open(map, marker);
             }
         })(marker, i));
-    }
+        
+        return marker;
+    });
+    
+    var maxZoom = 16;
+    markerCluster = new MarkerClusterer(map, markers, { maxZoom: maxZoom, gridSize: 45, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+    
+    var previousZoomLevel;
+    var clusterClickTriggeredZoom = false;
+    google.maps.event.addListener(map, 'zoom_changed', function() {
+        if (clusterClickTriggeredZoom) {
+            if (map.getZoom() > maxZoom + 1) {
+                map.setZoom(maxZoom + 1);
+            } else if (map.getZoom() - previousZoomLevel > 5) {
+                map.setZoom(previousZoomLevel + 5);
+            }
+            clusterClickTriggeredZoom = false;
+        }
+    });
+    
+    google.maps.event.addListener(markerCluster, 'clusterclick', function(cluster) {
+        previousZoomLevel = map.getZoom();
+        clusterClickTriggeredZoom = true;
+    });
 }
