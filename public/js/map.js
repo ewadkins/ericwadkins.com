@@ -45,7 +45,6 @@ function mapLocations(locations) {
                 fillOpacity: 1.0,
                 strokeOpacity: 0.10,
             },
-            map: map
         });
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
