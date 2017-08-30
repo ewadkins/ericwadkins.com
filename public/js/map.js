@@ -58,7 +58,9 @@ function mapLocations(locations) {
     });
     
     var maxZoom = 16;
-    markerClusterer = new MarkerClusterer(map, markers, { maxZoom: maxZoom, gridSize: 45, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+    markerClusterer = new MarkerClusterer(map, markers,{ maxZoom: maxZoom, gridSize: 45,
+                                                        imagePath: 'img/markers/m' });
+    // https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m
     
     var previousZoomLevel;
     var clusterClickTriggeredZoom = false;
