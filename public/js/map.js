@@ -25,6 +25,7 @@ function perturb(x) {
     return x + 0.001 * (approximateBellCurve() - 0.5);
 }
 
+var markClusters = window.location.search.indexOf('noclusters') === -1;
 var map, markerClusterer;
 function mapLocations(locations) {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -36,16 +37,21 @@ function mapLocations(locations) {
     var infowindow = new google.maps.InfoWindow();
     
     var markers = locations.map(function (location, i) {
-        var marker = new google.maps.Marker({
+        var opt = {
             position: new google.maps.LatLng(location[1], location[2]),
-            icon: {
+        };
+        if (!markClusters) {
+            opt.map = map;
+        } else {
+            opt.icon = {
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: 7,
                 fillColor: 'red',
                 fillOpacity: 1.0,
                 strokeOpacity: 0.10,
-            },
-        });
+            };
+        }
+        var marker = new google.maps.Marker(opt);
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function() {
@@ -58,8 +64,10 @@ function mapLocations(locations) {
     });
     
     var maxZoom = 16;
-    markerClusterer = new MarkerClusterer(map, markers,{ maxZoom: maxZoom, gridSize: 45,
+    if (markClusters) {
+        markerClusterer = new MarkerClusterer(map, markers,{ maxZoom: maxZoom, gridSize: 45,
                                                         imagePath: 'img/markers/m' });
+    }
     // https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m
     
     var previousZoomLevel;
