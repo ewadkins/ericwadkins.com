@@ -120,6 +120,7 @@ function create(db) {
         '^\/analytics',
         '^\/a$', // analytics short link
         '^\/map',
+        '^\/img/markers',
         '^\/m$' // map short link
     ];
 
