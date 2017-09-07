@@ -6,7 +6,7 @@ var whois = require('whois-ux');
 
 process.env.TZ = 'America/New_York';
 
-module.exports = function(val, callback) {
+module.exports = function(val, callback, override) {
     
     var domain, ip;
     if (/[a-zA-Z]/.test(val)) { // is not an ip, assume domain name
@@ -16,7 +16,15 @@ module.exports = function(val, callback) {
         ip = val;
     }
     
-    whois.whois(val, function(err, whoisResults) {
+    if (!override) {
+        whois.whois(val, function(err, whoisResults) {
+            process(whoisResults || {});
+        });
+    } else {
+        process({});
+    }
+    
+    function process(whoisResults) {
         if (domain) {
             dnsLookup(domain, function(err, ip) {
                 geoLookup(ip, function(geo) {
@@ -31,7 +39,7 @@ module.exports = function(val, callback) {
                 });
             });
         }
-    });
+    }
     
 }
 

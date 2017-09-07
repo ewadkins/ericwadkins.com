@@ -286,7 +286,7 @@ function create(db) {
                         });
                     });
                     
-                });
+                }, true);
             }, 0);
         }
         next();
