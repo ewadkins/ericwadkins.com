@@ -2,6 +2,7 @@ var dns = require('dns');
 var parseDomain = require('parse-domain');
 var geoip = require('geoip-lite');
 var iso3166 = require('iso-3166-2');
+var whois = require('whois-ux');
 
 process.env.TZ = 'America/New_York';
 
@@ -15,34 +16,37 @@ module.exports = function(val, callback) {
         ip = val;
     }
     
-    if (domain) {
-        dnsLookup(domain, function(err, ip) {
+    whois.whois(val, function(err, whoisResults) {
+        if (domain) {
+            dnsLookup(domain, function(err, ip) {
+                geoLookup(ip, function(geo) {
+                    return analyze(ip, domain, geo, whoisResults, callback);
+                });
+            });
+        }
+        else {
             geoLookup(ip, function(geo) {
-                return analyze(ip, domain, geo, callback);
+                reverseDnsLookup(ip, function(err, domain) {
+                    return analyze(ip, domain, geo, whoisResults, callback);
+                });
             });
-        });
-    }
-    else {
-        geoLookup(ip, function(geo) {
-            reverseDnsLookup(ip, function(err, domain) {
-                return analyze(ip, domain, geo, callback);
-            });
-        });
-    }
+        }
+    });
     
 }
 
-function analyze(ip, domain, geo, callback) {
+function analyze(ip, domain, geo, whoisResults, callback) {
     
     // Domain parsing
     var longDomain, domain, entity, crawler = false;
     
     var parsed = domain ? parseDomain(domain) : null;
-    longDomain = parsed ? [parsed.subdomain, parsed.domain, parsed.tld]
-        .filter(n => n).join('.') : domain;
     domain = parsed ? [parsed.domain, parsed.tld]
         .filter(n => n).join('.') : null;
-    entity = parsed ? parsed.domain.toUpperCase() : null;
+    longDomain = parsed ? [parsed.subdomain, parsed.domain, parsed.tld]
+        .filter(n => n).join('.') : domain;
+    entity = whoisResults.OrgName || whoisResults.netname || whoisResults.NetName || null;
+    entity = parsed ? (entity ? entity + ' (' + parsed.domain.toUpperCase() + ')' : parsed.domain.toUpperCase()) : null;
     crawler = /(crawl|spider|bot)[\.-]/.test(longDomain);
 
     // GeoIP lookup
