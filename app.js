@@ -222,6 +222,10 @@ function create(db) {
                         else {
                             message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
                         }
+                        if (entity) {
+                            message += '<tr><td ' + styleAttr + '><b> Entity </b></td><td>'
+                                + (entity || unknown) + '</td></tr>';
+                        }
                         message += '<tr><td ' + styleAttr + '><b> Crawler? </b></td><td>'
                             + (crawler ? 'Yes' : 'No') + '</td></tr>';
                         if (domain) {
