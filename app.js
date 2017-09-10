@@ -281,7 +281,7 @@ function create(db) {
                             range || ''
                         );
 
-                        app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (countryCode ? '[' + countryCode + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
+                        app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (countryCode ? '[' + countryCode + (countryCode === 'US' ? ':' + regionCode : '') + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
                                  message, true, function(success) {
                             if (!success) {
                                 logger.error('Error sending GeoIP Tracker email. Results:');
