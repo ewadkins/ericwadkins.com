@@ -216,8 +216,6 @@ function create(db) {
                                 + (longDomain || unknown) + '</td></tr>';
                             message += '<tr><td ' + styleAttr + '><b> Domain </b></td><td>'
                                 + (domain || unknown) + '</td></tr>';
-                            message += '<tr><td ' + styleAttr + '><b> Entity </b></td><td>'
-                                + (entity || unknown) + '</td></tr>';
                         }
                         else {
                             message += '<tr><td ' + styleAttr + '><b>DNS Reverse Lookup</b></td><td><i>Lookup failed</i></td></tr>';
