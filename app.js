@@ -140,7 +140,7 @@ function create(db) {
         if (parts.length > 1) {
             singleIp = parts[0].trim();
         }
-        
+                
         // Remove expired
         for (var field in recentMap) {
             if (recentMap.hasOwnProperty(field)) {
@@ -290,7 +290,7 @@ function create(db) {
                         });
                     });
                     
-                }, true);
+                }, false);
             }, 0);
         }
         next();
