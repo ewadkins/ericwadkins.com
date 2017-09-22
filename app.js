@@ -288,7 +288,7 @@ function create(db) {
                         });
                     });
                     
-                }, false);
+                });
             }, 0);
         }
         next();
