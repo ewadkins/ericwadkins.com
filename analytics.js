@@ -143,8 +143,43 @@ function getData(args, callback) {
                 parsed.push(obj);
             }
         }
+        
+        // Working on developing new feature
+        //test(parsed.sort((a, b) => a.date - b.date));
+        
         callback(parsed);
     });
+}
+
+function test(ordered) {
+    var count = 1;
+    var lastIp = ordered[0];
+    for (var i = 1; i < ordered.length + 1; i++) {
+        if (i < ordered.length && lastIp === ordered[i].ip) {
+            count++;
+        } else {
+            if (count > 1) {
+                console.log();
+                span = (ordered[i-1].date.getTime() - ordered[i-count].date.getTime()) / 1000;
+                console.log(count + ' (' + lastIp + ') ' + span + ' s');
+                totalTime = 0;
+                for (var j = count - 1; j >= 0; j--) {
+                    console.log('  ' + ordered[i-j-1].path);
+                    if (j > 0) {
+                        time = (ordered[i-j].date.getTime() - ordered[i-j-1].date.getTime()) / 1000;
+                        console.log('    ' + time);
+                        totalTime += time;
+                    }
+                }
+                console.log('    Avg. Time: ' + totalTime / (count - 1));
+            }
+            if (i < ordered.length) {
+                lastIp = ordered[i].ip;
+            }
+            count = 1;
+        }
+    }
+    console.log();
 }
 
 function run(args, callback) {
