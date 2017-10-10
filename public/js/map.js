@@ -36,10 +36,12 @@ function mapLocations(locations) {
 
     var infowindow = new google.maps.InfoWindow();
     
+    var data = [];
     var markers = locations.map(function (location, i) {
         var opt = {
             position: new google.maps.LatLng(location[1], location[2]),
         };
+        data.push(opt.position);
         if (!markClusters) {
             opt.map = map;
         } else {
