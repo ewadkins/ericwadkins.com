@@ -167,6 +167,9 @@ function create(db) {
             recentMap[singleIp] = new Date();
             
             // Don't record visits to untracked paths
+            if (req.query.hasOwnProperty('untracked')) {
+                return next();
+            }
             for (var i = 0; i < untracked.length; i++) {
                 if (new RegExp(untracked[i]).test(path)) {
                     return next();
