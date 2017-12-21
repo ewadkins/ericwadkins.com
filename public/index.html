@@ -98,14 +98,18 @@
 
     <!-- Header -->
     <header>
-        <div class="container">
+        <!--<video id="video" onloaddata="javascript:resizeWindow()" autoplay loop style="opacity:0.5;z-index:0;position:absolute;left:0;top:0;object-fit:fill" width="100%" height="100%" name="Video Name" src="../vid/numbers.mov"></video>-->
+        <div id="large-header" style="position:absolute;pointer-events:none" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+        </div>
+        <div class="container" id="header">
             <div class="intro-text">
                 <div style="padding-bottom:32px">
-                    <img src="img/profile.png" width="250" class="img-responsive img-circle" alt="">
+                    <img src="img/profile_small.png" width="250" class="img-responsive img-circle" alt="">
                 </div>
-                <div class="intro-lead-in">Welcome To My Portfolio!</div>
                 <div class="intro-heading">Eric Wadkins</div>
-                <a href="#papers" class="page-scroll btn btn-xl">Show Me More</a>
+                <div class="intro-lead-in">Welcome To My Portfolio!</div>
+                <a href="#papers" id="intro-button" class="page-scroll btn btn-xl"><i class="fa fa-2x fa-arrow-down"></i><!--Show Me More--></a>
             </div>
         </div>
     </header>
@@ -122,13 +126,13 @@
             <div class="row text-center">
                 <div class="col-lg-12">
                     <a href="doc/Computer_Vision_Tools_NV_Centers.pdf" target="blank"><i class="fa fa-file-pdf-o"></i> Computer Vision Tools for Location Nitrogen-Vacancy Centers</a>
-                    <p class="text-muted"><b>Eric Wadkins</b>, Michael Walsh, Dirk Englund. 2017<br><a href="https://www.academia.edu/33213392/Computer_Vision_Tools_for_Locating_Nitrogen-Vacancy_Centers" target="blank">Academia.edu</a> | <a href="doc/Computer_Vision_Tools_NV_Centers.pdf" download="Computer_Vision_Tools_NV_Centers.pdf">Download <i class="fa fa-download"></i></a></p>
+                    <p class="text-muted">Eric Wadkins, Michael Walsh, Dirk Englund. 2017<br><a href="https://www.academia.edu/33213392/Computer_Vision_Tools_for_Locating_Nitrogen-Vacancy_Centers" target="blank">Academia.edu</a> | <a href="doc/Computer_Vision_Tools_NV_Centers.pdf" download="Computer_Vision_Tools_NV_Centers.pdf">Download <i class="fa fa-download"></i></a></p>
                 </div>
                 <br><br><br><hr>
                 <div class="col-lg-12">
                     <a href="doc/Utility_Programs_NV_Centers.pdf" target="blank"><i class="fa fa-file-pdf-o"></i> Utility Programs for Nitrogen-Vacancy Center
 Identification and Initialization Analysis</a> (contributor, &sect;2)
-                    <p class="text-muted">Aaron Vontell, Michael Walsh, <b>Eric Wadkins</b>, Dirk Englund. 2017<br><a href="https://www.academia.edu/31449928/Winter_2017_Project_Summary_-_Utility_programs_for_nitrogen-vacancy_center_identification_and_initialization_analysis" target="blank">Academia.edu</a> | <a href="doc/Utility_Programs_NV_Centers.pdf" download="Utility_Programs_NV_Centers.pdf">Download <i class="fa fa-download"></i></a></p>
+                    <p class="text-muted">Aaron Vontell, Michael Walsh, Eric Wadkins, Dirk Englund. 2017<br><a href="https://www.academia.edu/31449928/Winter_2017_Project_Summary_-_Utility_programs_for_nitrogen-vacancy_center_identification_and_initialization_analysis" target="blank">Academia.edu</a> | <a href="doc/Utility_Programs_NV_Centers.pdf" download="Utility_Programs_NV_Centers.pdf">Download <i class="fa fa-download"></i></a></p>
                 </div>
             </div>
         </div>
@@ -140,7 +144,7 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Skills</h2>
-                    <h3 class="section-subheading text-muted">Some of the things I've learned or have experience with...</h3>
+                    <h3 class="section-subheading text-muted">Some of the things I've learned...</h3>
                 </div>
             </div>
             <div class="row text-center">
@@ -472,89 +476,103 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="/img/winthrop.jpg" alt="Winthrop, Massachusetts">
+                                <img class="img-circle img-responsive" src="/img/winthrop_square.jpg" alt="Winthrop, Massachusetts">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>2014</h4>
-                                    <h4 class="subheading">Graduated Winthrop High School</h4>
+                                    <h4 class="subheading">Graduated Winthrop High School, Winthrop, MA</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">I graduated from Winthrop High School at the top of my class, excited for the challenges that awaited me at MIT.</p>
+                                    <p class="text-muted">I graduated from Winthrop High School near the top of my class, excited for the challenges that awaited me at MIT.</p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
-                            <div class="timeline-image">
+                            <a href="http://www.mit.edu/" target="blank"><div class="timeline-image">
                                 <img class="img-circle img-responsive" src="/img/mit.jpg" alt="Massachusetts Institute of Technology">
-                            </div>
+                            </div></a>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>2014-2018</h4>
-                                    <h4 class="subheading">Attends MIT - Computer Science</h4>
+                                    <h4 class="subheading">Attends <a href="http://www.mit.edu/" target="blank">MIT</a> - Computer Science</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">As a member of the Class of 2018 and a candidate for a BS in Computer Science and Engineering, I continue to take advantage of many of the interesting classes and extracurriculars that MIT has to offer. I am particularly interested in artificial intelligence and machine learning and plan to focus on these fields for the remainder of my time here.</p>
+                                    <p class="text-muted">As a member of the Class of 2018 and a candidate for a BS in Computer Science and Engineering, I continue to take advantage of many of the interesting learning opportunities that MIT has to offer. I am particularly interested in artificial intelligence and machine learning, and plan to focus on these fields for the remainder of my time here.</p>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/diameterhealth_square.png" alt="Software Engineer Intern at Diameter Health">
-                            </div>
+                            <a href="https://www.diameterhealth.com/" target="blank"><div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/diameterhealth_square2.png" alt="Software Engineer Intern at Diameter Health">
+                            </div></a>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>2015-2017</h4>
-                                    <h4 class="subheading"><a href="http://diameterhealth.com/" target="blank">Diameter Health</a>, Newton, MA</h4>
+                                    <h4 class="subheading"><a href="https://www.diameterhealth.com/" target="blank">Diameter Health</a>, Newton, MA</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Starting with a Summer 2015 software engineering internship and advancing into a continuous position throughout the year and up to February 2017, my work at <b>Diameter Health</b> includes designing and developing automated predictive tools and full-stack applications that serve the healthcare industry through their use of clinical intelligence.</p>
+                                    <p class="text-muted">Starting with a Summer 2015 software engineering internship and advancing into a part-time position throughout the year and up to February 2017, my work at <b>Diameter Health</b> includes designing and developing automated predictive tools and full-stack applications that serve the healthcare industry through their use of clinical intelligence.</p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
-                            <div class="timeline-image">
+                            <a href="https://www.csail.mit.edu/" target="blank"><div class="timeline-image">
                                 <img class="img-circle img-responsive" src="img/csail_square.png" alt="Computer Science and Artificial Intelligence Laboratory (CSAIL)">
-                            </div>
+                            </div></a>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>2016</h4>
                                     <h4 class="subheading"><a href="https://www.csail.mit.edu/" target="blank">Computer Science and Artificial Intelligence Laboratory</a>, MIT</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">As an undergraduate researcher, I worked with CSAIL's <b>InfoLab Group</b> to advance their goal of developing intelligent interactive software systems that help people access information and solve problems on human terms.</p>
+                                    <p class="text-muted">As an undergraduate researcher, I worked with <b>CSAIL's InfoLab Group</b> to advance their goal of developing intelligent interactive software systems that help people access information and solve problems on human terms. My work there was primarily focused on a video action recognition system.</p>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="timeline-image">
+                            <a href="http://www.rle.mit.edu/" target="blank"><div class="timeline-image">
                                 <img class="img-circle img-responsive" src="img/rle_square.png" alt="Research Laboratory of Electronics (RLE)">
-                            </div>
+                            </div></a>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>2017 - Present</h4>
                                     <h4 class="subheading"><a href="http://www.rle.mit.edu/" target="blank">Research Laboratory of Electronics</a>, MIT</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">I am currently an undergraduate researcher in the <b>Quantum Photonics Laboratory</b> developing machine learning and computer vision-enabled algorithms to automate processes in the lab, such as detection and examination of auxiliary information near nitrogen-vacancy centers in diamond.</p>
+                                    <p class="text-muted">I am currently a MITRE Undergraduate Research and Innovation Scholar in the <b>Quantum Photonics Laboratory</b>. My work includes developing machine learning and computer vision-enabled systems to automate laboratory processes, such as the detection of nitrogen-vacancy centers in diamond. I am currently leading a year-long project into the creation of a smart microscopy system to enable autonomous laboratory experiments.</p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
-                            <div class="timeline-image">
+                            <a href="https://google.com/about" target="blank"><div class="timeline-image">
                                 <img class="img-circle img-responsive" src="img/google_square.png" alt="Google">
-                            </div>
+                            </div></a>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2017 - Present</h4>
-                                    <h4 class="subheading"><a href="http://google.com/" target="blank">Google</a>, Los Angeles</h4>
+                                    <h4>Summer 2017</h4>
+                                    <h4 class="subheading"><a href="https://google.com/about/" target="blank">Google</a>, Los Angeles</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted"> In Summer 2017, I interned with Google as a Software Engineering Intern in their Venice, Los Angeles office.</p>
+                                    <p class="text-muted"> In Summer 2017, I interned with <b>Google</b> as a Software Engineering Intern in their Venice, Los Angeles office. As a part of the YouTube team, my work included performance enchancements to some of YouTube's infrastructure.</p>
                                 </div>
                             </div>
                         </li>
                         <li>
+                            <a href="https://www.nasa.gov/" target="blank"><div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/nasa_square4.png" alt="Google">
+                            </div></a>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Winter 2018</h4>
+                                    <h4 class="subheading"><a href="https://www.nasa.gov/" target="blank">NASA</a>, Goddard Space Flight Center, MD</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted"> For Winter 2018, I am interning with <b>NASA</b> at the Goddard Space Flight Center, where I'm using machine learning to relate satellite measurements to applications of aerosol science. The Global Modeling and Assimilation Office at NASA uses these measurements in global climate models to answer some of the fundamental questions of climate science.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
                             <div class="timeline-image">
                                 <img class="img-circle img-responsive" src="img/laptop.jpg" alt="Personal Projects">
                             </div>
@@ -569,7 +587,7 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
                                 </div>
                             </div>
                         </li>
-                        <li class="timeline-inverted">
+                        <li>
                             <a href="#contact" class="page-scroll">
                                 <div class="timeline-image green">
                                     <h4>Be Part
@@ -598,9 +616,9 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
                     <div class="team-member">
                         <img src="img/profile.png" width="400" class="img-responsive img-circle" alt="Eric Wadkins">
                         <h4>Eric Wadkins</h4>
-                        <p class="text-muted">Software Engineer and Coding Enthusiast</p>
-                        <p class="text-muted">I'm a member of MIT's Class of 2018 and my passion is Computer Science.
-                            <br/>My interests are <strong>machine learning</strong>, <strong>artificial intelligence</strong>, <strong>computer vision</strong>, and <strong>natural language processing</strong>.
+                        <p class="text-muted"><b>AI Enthusiast and incoming Software Engineer @ Google</b></p>
+                        <p class="text-muted">I'm a member of MIT's Class of 2018 and an incoming Software Engineer at Google, and my passion is Computer Science.
+                            <br/>My interests include <strong>artificial intelligence</strong>, <strong>machine learning</strong>, <strong>computer vision</strong>, and <strong>natural language processing</strong>.
                             <br/>A general design goal of mine is to automate a process with as little user input as possible.</p>
                         <ul class="list-inline social-buttons">
                             <!--<li><a href="#"><i class="fa fa-twitter"></i></a>
@@ -636,6 +654,9 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
             		<a href="https://www.csail.mit.edu/" target="blank" class="client-link">
             			<img class="center-block" src="img/csail.png" alt="Computer Science and Artificial Intelligence Laboratory (CSAIL)">
             		</a>
+            		<a href="http://nasa.gov/" target="blank" class="client-link">
+            			<img class="center-block" src="img/nasa.png" alt="NASA">
+            		</a>
             		<a href="http://google.com/" target="blank" class="client-link">
             			<img class="center-block" src="img/google.png" alt="Google">
             		</a>
@@ -656,10 +677,10 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Contact Me</h2>
-                    <h3 class="contact-info">Email: <a href="mailto:ewadkins@mit.edu">ewadkins@mit.edu</a> | <a href="mailto:info@ericwadkins.com">eric@ericwadkins.com</a></h3>
+                    <h3 class="contact-info">Email: <a href="mailto:ewadkins@mit.edu">ewadkins@mit.edu</a> || <a href="mailto:info@ericwadkins.com">ewadkins83@gmail.com</a></h3>
                     <h3 class="contact-info">Address: <a href="https://www.google.com/maps/place/229+Vassar+St,+Cambridge,+MA+02139" target="blank">Simmons Hall. 229 Vassar St., Cambridge, MA 02139</a></h3>
                     <h3 class="contact-info">Phone: <a href="tel:6178395035">(617) 839-5035</a></h3>
-                    <h3 class="section-subheading text-muted">...or use the following form</h3>
+                    <h3 class="section-subheading text-muted" style="color:white">...or use the following form</h3>
                 </div>
             </div>
             <div class="row">
@@ -702,7 +723,7 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; 2014-2016 <a href="#">Eric Wadkins</a>
+                    <span class="copyright">Copyright &copy; 2014-2018 <a href="#">Eric Wadkins</a>
                     </span>
                 </div>
                 <div class="col-md-4">
@@ -723,11 +744,11 @@ Identification and Initialization Analysis</a> (contributor, &sect;2)
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li><a href="#about" class="page-scroll">About</a>
+                        <li><a href="#about" class="page-scroll"><strong>About</strong></a>
                         </li>
-                        <li><a href="#contact" class="page-scroll">Contact</a>
+                        <li><a href="#contact" class="page-scroll"><strong>Contact</strong></a>
                         </li>
-                        <li><a href="/resume" target="blank"><i class="fa fa-file-pdf-o"></i> Resume</a>
+                        <li><a href="/resume" target="blank"><i class="fa fa-file-pdf-o"><strong></i> Resume</strong></a>
                         </li>
                     </ul>
                 </div>
@@ -1207,6 +1228,12 @@ int ackermann(int m, int n) {
     <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
     <script src="js/contact_me.js"></script>
+        
+    <!-- Header Animation -->
+    <script src="js/TweenLite.min.js"></script>
+    <script src="js/EasePack.min.js"></script>
+    <script src="js/rAF.js"></script>
+    <script src="js/demo-1.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>

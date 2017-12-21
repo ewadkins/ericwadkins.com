@@ -51,3 +51,8 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+
+function resizeVideo() {
+    $('#video').height($('#header').height() + 'px')
+}
+window.addEventListener('resize', resizeVideo);

@@ -50,6 +50,9 @@ h6 {
 .bg-darkest-gray {
     background-color: #222
 }
+#intro-button {
+    padding: 16px 32px 16px 32px;
+}
 .btn-primary {
     color: #fff;
     background-color: #5cb85c;
@@ -182,6 +185,12 @@ fieldset[disabled] .btn-xl.active {
     color: #5cb85c;
     outline: 0
 }
+.navbar-default .navbar-collapse {
+    background-color: rgba(34,34,34,0.7);
+    margin-left: -16px;
+    padding-right: 16px;
+    border-radius: 8px;
+}
 .navbar-default .navbar-nav>.active>a {
     border-radius: 0;
     color: #fff;
@@ -219,7 +228,8 @@ fieldset[disabled] .btn-xl.active {
     }
 }
 header {
-    background-image: url(../img/code.jpg);
+    background-image: url(../img/code2.jpg);
+    /*background-image: url(../vid/dark.mov);*/
     background-repeat: none;
     background-attachment: scroll;
     background-position: center center;
@@ -282,7 +292,7 @@ section .contact-info {
     color: white;
 }
 section {
-    padding: 100px 0
+    padding: 85px 0 !important
 }
 section h2.section-heading {
     font-size: 40px;
@@ -779,12 +789,12 @@ body {
 .client-link {
     display: inline-block;
     vertical-align: middle;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .client-link img {
-    max-width: 300px;
+    max-width: 250px;
     max-height: 70px;
 }
 
