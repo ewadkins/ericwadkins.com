@@ -292,7 +292,7 @@ section .contact-info {
     color: white;
 }
 section {
-    padding: 85px 0 !important
+    padding: 100px 0 !important
 }
 section h2.section-heading {
     font-size: 40px;
@@ -583,7 +583,6 @@ section h3.section-subheading {
 }
 .team-member {
     text-align: center;
-    margin-bottom: 50px
 }
 .team-member img {
     margin: 0 auto;
