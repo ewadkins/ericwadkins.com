@@ -22,6 +22,7 @@ var config = {
 			collage: 'dashboard/collage/index.html',
 			gas: 'dashboard/gas/index.html',
             map: 'map.html',
+            analytics: 'analytics.html',
 		},    
 		db: {
 			hostname: 'ds059165.mongolab.com',

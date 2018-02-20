@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var wikiShortestPath = require('../../../WikiShortestPath/wikiShortestPath');
+var wikiShortestPath = require('../../WikiShortestPath/wikiShortestPath');
 
 module.exports = function(db){
 

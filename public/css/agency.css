@@ -53,6 +53,28 @@ h6 {
 #intro-button {
     padding: 16px 32px 16px 32px;
 }
+
+.btn-circle {
+  font-size: 26px;
+  width: 55px;
+  height: 55px;
+  margin-top: 15px;
+  line-height: 45px;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
+  color: white;
+  border: 2px solid white;
+  border-radius: 100% !important;
+  background: transparent;
+}
+
+.btn-circle:focus, .btn-circle:hover {
+  color: white;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .btn-primary {
     color: #fff;
     background-color: #5cb85c;
@@ -106,7 +128,8 @@ fieldset[disabled] .btn-primary.active {
     font-weight: 700;
     border-radius: 3px;
     font-size: 18px;
-    padding: 20px 40px
+    padding: 20px 40px;
+    box-shadow: 3px 3px 3px 0 rgba(0,0,0,0.2);
 }
 .btn-xl:hover,
 .btn-xl:focus,
@@ -179,7 +202,16 @@ fieldset[disabled] .btn-xl.active {
     font-weight: 400;
     letter-spacing: 1px;
     color: #fff
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
 }
+
+.navbar-default .navbar-nav>li>a {
+    color: #ccc
+}
+
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {
     color: #5cb85c;
@@ -228,7 +260,8 @@ fieldset[disabled] .btn-xl.active {
     }
 }
 header {
-    background-image: url(../img/code2.jpg);
+    background-image: url(../img/wave.jpg);
+    /*background-image: url(../img/binary_world.jpg);*/
     /*background-image: url(../vid/dark.mov);*/
     background-repeat: none;
     background-attachment: scroll;
@@ -265,7 +298,7 @@ header .intro-text .intro-heading {
 }
 @media (min-width: 768px) {
     header .intro-text {
-        padding-top: 200px;
+        padding-top: 175px; /*200px*/
         padding-bottom: 150px
     }
     header .intro-text .intro-lead-in {

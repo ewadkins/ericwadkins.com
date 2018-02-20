@@ -118,6 +118,9 @@ function create(db) {
         '^\/vid', // videos load incrementally and may send many requests
         '^\/favicon.ico', // sometimes automatically attempts to load the favicon
         '^\/analytics',
+        '^\/analytics2',
+        '^\/api/viewdata',
+        '^\/api/viewdataanalysis',
         '^\/a$', // analytics short link
         '^\/map',
         '^\/img/markers',
@@ -345,8 +348,10 @@ function create(db) {
 	app.use('/schedule', require(path.join(__dirname, config.server.routesDirectory, 'schedule'))(db, logger));
 	app.use('/mail', require(path.join(__dirname, config.server.routesDirectory, 'mail'))(db, logger));
 	app.use('/analytics', require(path.join(__dirname, config.server.routesDirectory, 'analytics'))(db, logger));
+	app.use('/analytics2', require(path.join(__dirname, config.server.routesDirectory, 'analytics2'))(db, logger));
 	app.use('/map', require(path.join(__dirname, config.server.routesDirectory, 'map'))(db, logger));
 	app.use('/api/viewdata', require(path.join(__dirname, config.server.routesDirectory, 'api/viewdata'))(db, logger));
+	app.use('/api/viewdataanalysis', require(path.join(__dirname, config.server.routesDirectory, 'api/viewdataanalysis'))(db, logger));
 	app.use('/resume', require(path.join(__dirname, config.server.routesDirectory, 'resume'))(db, logger));
 	app.use('/resume', require(path.join(__dirname, config.server.routesDirectory, 'resume'))(db, logger));
 	app.use('/signature', require(path.join(__dirname, config.server.routesDirectory, 'signature'))(db, logger));
