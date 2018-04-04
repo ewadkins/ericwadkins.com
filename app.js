@@ -187,7 +187,7 @@ function create(db) {
                     var domain = data.domain;
                     var longDomain = data.longDomain;
                     var entity = data.entity;
-                    var crawler = data.crawler || (robotsMap[singleIp] || false);
+                    var crawler = data.crawler || (!!(robotsMap[singleIp]) || false);
                     var country = data.country;
                     var countryCode = data.countryCode;
                     var region = data.region;
