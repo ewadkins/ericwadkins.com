@@ -284,6 +284,9 @@ function create(db) {
                             latLong || '',
                             range || ''
                         );
+                        
+                        // Stop sending email notifications for crawlers
+                        if (crawler) return;
 
                         app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (countryCode ? '[' + countryCode + (countryCode === 'US' && regionCode ? ':' + regionCode : '') + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
                                  message, true, function(success) {
