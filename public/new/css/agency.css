@@ -444,13 +444,14 @@ aside.clients img {
   }
   .timeline > li {
     min-height: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 0px;
   }
   .timeline > li .timeline-panel {
     float: left;
     width: 41%;
     padding: 0 20px 20px 30px;
     text-align: right;
+    *margin-bottom: calc(-100%);
   }
   .timeline > li .timeline-image {
     left: 50%;
@@ -703,4 +704,8 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
     #social2 {
         visibility: hidden;
     }
+}
+
+.about-btn {
+  padding: 16px 32px;
 }
