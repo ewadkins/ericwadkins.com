@@ -347,14 +347,14 @@ a:hover, a:focus, a:active {
 }
 
 .btn-secondary {
-  background-color: #ecb807 !important;
-  border-color: #ecb807 !important;
+  background-color: #fed136 !important;
+  border-color: #fed136 !important;
   color: #fff !important;
 }
 
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
-  background-color: #ba9106 !important;
-  border-color: #ba9106 !important;
+  background-color: #fec503 !important;
+  border-color: #fec503 !important;
 }
 
 .btn-dark {
@@ -375,7 +375,7 @@ a:hover, a:focus, a:active {
 }
 
 .text-secondary {
-  color: #ecb807 !important;
+  color: #fed136 !important;
 }
 
 .portfolio-img {
