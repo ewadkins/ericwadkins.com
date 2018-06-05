@@ -21,6 +21,10 @@ module.exports = function(db, logger){
 		res.redirect(path.join('/', config.server.p2));
 	});
 
+	router.get('/p/3', function(req, res, next) {
+		res.redirect(path.join('/', config.server.p3));
+	});
+
 	router.get('/d', function(req, res, next) {
 		res.redirect('/dashboard');
 	});
