@@ -143,7 +143,7 @@
           <div class="col-sm-12 col-lg-8" id="intro-section" style="margin-bottom: 1rem; margin-top:1rem">
             <h4>Eric Wadkins</h4>
             <p class="lead"><b>MIT '18, M.Eng. Student, Software Engineer, and AI/ML Researcher</b></p>
-            <p class="lead" style="font-size: 14pt">I'm a member of MIT's Class of 2018 and my passion is Computer Science.
+            <p class="lead" style="font-size: 14pt">I'm a graduate of MIT's Class of 2018 and my passion is Computer Science.
             <br/>My interests include software design and development, artificial intelligence, machine learning, computer vision, and natural language processing.</p>
             <p class="lead" style="font-size: 14pt">I'm currently a graduate student working towards my Master of Engineering (M.Eng.) degree in Computer Science/Artificial Intelligence.</p>
             <p class="lead" style="*font-size: 15pt; margin-bottom:0px"><b>Massachusetts Institute of Technology (MIT)</b></p>
@@ -798,6 +798,7 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
         </div>
     </footer>
       
+
     <!-- Portfolio Modals -->
 
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
@@ -915,12 +916,13 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Collage Generator</h2>
                   <p class="lead">Intelligently draws a message with images.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <img class="img-fluid d-block mx-auto" src="/img/collage_big.jpg" alt="Intelligently draws messages with images">
+                  <p class="lead">Collage Generator uses machine learning techniques, such as K-Means Clustering, to determine which images should be used to draw the message and which to use as the background.</p>
+                  <p class="lead">Given a single set of images (.zip file) and a message to display, my Collage Generator returns a high resolution collage with the message drawn out using the images. It works by determining a subset of images that are the most distinct and drawing the message with those and the background with the others.</p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/CollageGenerator" target="blank">https://github.com/ewadkins/CollageGenerator</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=CollageGenerator" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -946,12 +948,14 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>OpenGL Game Engine</h2>
                   <p class="lead">A custom game engine including dynamic lighting, terrain, and static and dynamic objects.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <img class="img-fluid d-block mx-auto" src="/img/gameengine_big.png" alt="Custom OpenGL game engine">
+                  <p class="lead">A custom game engine created from scratch in C++ using OpenGL.</p>
+                  <p class="lead">This includes GLSL shader support for dynamic lighting (ambient, diffuse, and specular) and multiple light sources, algorithms to generate multiple different types of terrain (the images above show fractal-generated mountains and hills, respectively), and an intuitive object rendering system that handles both static and dynamic objects.</p>
+                  <p class="lead">A previous version of this game engine created in Java using <a href="https://www.lwjgl.org/" target="blank">LWJGL</a> and the <a href="http://jbullet.advel.cz/" target="blank">JBullet Physics Library</a> also includes a customizable object UI and real-time physics that can be used to simulate complicated collisions.</p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/OpenGLGameEngine" target="blank">https://github.com/ewadkins/OpenGLGameEngine</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=OpenGLGameEngine" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -977,12 +981,25 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Ray Casting Simulation</h2>
                   <p class="lead">A simulation using AI techniques such as ray casting, spatial mapping, Bayesian filtering, pathfinding, etc.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <img class="img-fluid d-block mx-auto" src="/img/raycast_big.png" alt="AI simulation using Ray Casting">
+                  <p class="lead">An AI which simulates a robot that uses AI techniques to perform tasks such as estimating its location on a map and navigating towards a goal through an unknown maze in real time.</p>
+                  <p class="lead">Given an image, the simulation creates a map and uses AI techniques such as ray casting, spatial mapping, Bayesian filtering, and pathfinding to perform tasks such as navigating from a start to a goal given <strong>no knowledge</strong> of the layout the map (as shown in the image above), or determine its location within the map based on the features of the map it has encountered so far.</p>
+                  <video id="raycastVideo" width="450" height="450" controls autoplay>
+                    <source src="/vid/raycast_video.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <script>
+                      document.getElementById('raycastVideo').addEventListener('ended', function(e) {
+                          setTimeout(function(){
+                              document.getElementById('raycastVideo').play();
+                          }, 2000);
+                      }, false);
+                  </script>
+                  <p class="lead">The above video shows the AI navigate through the maze from start to goal without any prior knowledge of the map. This is done solely by collecting data from its sensors (the rays are shown in red) which report distances to obstacles, and then using techniques such as spatial mapping and pathfinding (modified <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="blank">A* algorithm</a>).</p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/RayCastingSimulation" target="blank">https://github.com/ewadkins/RayCastingSimulation</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=RayCastingSimulation" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -1008,12 +1025,13 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Seam Carver</h2>
                   <p class="lead">An application for content-aware image resizing.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <img class="img-fluid d-block mx-auto" src="/img/seamcarver_big.png" alt="Content-aware image resizing">
+                  <p class="lead">Using a technique called <a href="http://graphics.cs.cmu.edu/courses/15-463/2007_fall/hw/proj2/imret.pdf" target="blank">seam-carving</a>, this application allows you to take an image and resize it <i>without noticeably effecting the content</i>.</p>
+                  <p class="lead">Stretching, shrinking or cropping makes it obvious that an image has been modified, but seam-carving works by removing or adding pixels in the least noticeable locations in order to reduce or enlarge the size of the image. This application provides a UI for my implementation of the seam-carving algorithm. Above is an example of reducing the size of an image using content-aware resizing (the removed pixels are in red).</p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/SeamCarver" target="blank">https://github.com/ewadkins/SeamCarver</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=SeamCarver" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -1039,12 +1057,13 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Object Tracker</h2>
                   <p class="lead">An object recognition and tracking tool.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <img class="img-fluid d-block mx-auto" src="/img/objecttracker-big.png" alt="Color-Based Object Detection and Tracking">
+                  <p class="lead">An object recognition tool using OpenCV which uses color-based detection techniques, such as thresholding and the Hough Circle Transform to detect, learn, and then track different objects.</p>
+                  <p class="lead">Using video from your webcam, Object Tracker will detect circular objects which you can then choose to track. After choosing an object, it will then determine the optimal HSV range for thresholding and then track the object based on that range.</p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/ObjectTracker" target="blank">https://github.com/ewadkins/ObjectTracker</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=ObjectTracker" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -1070,12 +1089,16 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Audio Analyzer</h2>
                   <p class="lead">An audio analyzer and controller for an Arduino-driven LED strip.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <img class="img-fluid d-block mx-auto" src="/img/audioanalyzer_big.png" alt="Audio analyzer">
+                  <p class="lead">This application takes audio input from the microphone or speaker output, processes it, and then calculates certain audio metrics such as intensity gain, bass gain, average intensity, peak frequency, and estimated pitch. Coupled with the audio analyzer is an Arduino LED-controller, which I send serialized data about the changes in audio metrics in order to control a WS2812B LED-strip.</p>
+                  <p class="lead">The audio analyzer is able to extract useful information from audio in real-time. When processing the data, it takes into account the non-linearities of the human ear and modifies the data accordingly, in order to extract the most noticeable audio features. Then, it determines what information is required by the LED-controller and uses bit-packing to serialize and send the data as quickly as possible to give the smallest possible response time. Currently, the estimated pitch is mapped to a point on the color spectrum and used to control the hue of the lights, and the bass gain is used to control the brightness of the lights.</p>
+                  <p class="lead">Below is an example of the Audio Analyzer listening to the song <a href="https://www.youtube.com/watch?v=k1gsZ-OsGpI" target="blank">Hymn For The Weekend (Seeb remix) - Coldplay</a>.</p>
+                  <video controls="controls" width="915" height="330" name="Audio Analyzer" src="/vid/audioanalyzer.mp4"></video>
+                  <p class="lead">Audio Analyzer listening to <a href="https://www.youtube.com/watch?v=k1gsZ-OsGpI" target="blank">Hymn For The Weekend (Seeb remix) - Coldplay</a></p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/AudioAnalyzer" target="blank">https://github.com/ewadkins/AudioAnalyzer</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=AudioAnalyzer" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -1101,12 +1124,12 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Request</h2>
                   <p class="lead">A library used for sending HTTP/HTTPS requests with simple data management functions.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <p class="lead">A simple library used for sending HTTP and HTTPS requests, with many data management functions designed to make sending requests and parsing the response as easy as possible.</p>
+                  <p class="lead">Clients can easily add or modify query parameters, form data, URL-encoded form data, raw data, JSON data, and binary data via a Request object, and then easily read the response from a Response object, which includes automatic parsing into JSON and HTML data structures.</p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/Request" target="blank">https://github.com/ewadkins/Request</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=Request" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -1132,12 +1155,56 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Compiler/Transpiler</h2>
                   <p class="lead">Parses and compiles a custom programming language into C++.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <p class="lead">I've created my own C-based scripting language. While it strongly resembles other languages, it has features that others alone do not have. It includes Java's static type checking, C++'s primitive types, Python's binary operations and nested functions, and JavaScript's expression evaluation and objects.</p>
+                  <p class="lead">It is designed to overcome some of the more annoying aspects of C++, such as its inability to be used as a scripting language and resolve functions defined later in the file or nested within other functions. Simultaneously, it retains many of the great features of C++ as well as features from other languages like Python and JavaScript, all while keeping the speed C++ is known for. This is possible because the compiler uses <a href="http://www.antlr.org/" target="blank">ANTLR</a> and a <a href="https://github.com/ewadkins/Compiler/blob/master/src/com/ericwadkins/parser/Compiler.g4" target="blank">context-free grammar</a> to parse the code and then transpile it directly into C++.</p>
+                  <p class="lead">I'm still working on this project and looking to add more features. Below is a brief example of a the language implementation which demonstrates some of the features of the language so far, followed by the abstract syntax tree generated by the parser.</p>
+                  <pre style="text-align:left"><code>
+print(test(0));                           // Use as scripting language
+
+unsigned short test(int n) {              // unsigned short return type
+    long double x = 2;
+    if (n) {                              // if n != 0
+        return (unsigned short) x ** n;   // x to the power of n
+    }
+    return tryAgain();
+
+    unsigned short tryAgain() {           // Nested function
+        return test(n + 1);
+    }
+}
+                  </code></pre>
+                  <img class="img-responsive img-centered" src="/img/compiler_big3.png" alt="Parser and compiler for CBScript">
+                  <p class="lead">Below are two more examples: <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm" target="blank">Binary search</a> and the <a href="https://en.wikipedia.org/wiki/Ackermann_function" target="blank">Ackermann function</a>.</p>
+                  <pre style="text-align:left"><code>
+// Binary Search
+int binarySearch(int[] arr, int value, int left, int right) {
+    while (left <= right) {
+        int middle = (left + right) / 2;
+        if (arr[middle] == value)
+            return middle;
+        else if (arr[middle] > value)
+            right = middle - 1;
+        else
+            left = middle + 1;
+    }
+    return -1;
+}
+                  </code></pre>
+                  <img class="img-responsive img-centered" src="/img/compiler_big1.png" alt="Parser and compiler for CBScript">
+                  <pre style="text-align:left"><code>
+// Ackermann Function
+int ackermann(int m, int n) {
+    if (m == 0) return n + 1;
+    if (n == 0) return ackermann(m - 1, 1);
+
+    return ackermann(m - 1, ackermann(m, n - 1));
+}
+                  </code></pre>
+                  <img class="img-responsive img-centered" src="/img/compiler_big2.png" alt="Parser and compiler for CBScript">
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/Compiler" target="blank">https://github.com/ewadkins/Compiler</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=Compiler" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
@@ -1256,12 +1323,11 @@ Identification and Initialization Analysis</h5></a> (contributor, &sect;2)
                 <div class="modal-body">
                   <h2>Web Scraper</h2>
                   <p class="lead">Various purpose scripts for easy web scraping.</p>
-                  <img class="img-fluid d-block mx-auto" src="/img/mit_seal_square.jpg" alt="">
-                  <p class="lead">Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <p class="lead">Scripts used to efficiently scrape the web using various filters and heuristics to speed up the process. One example is my Wikipedia shortest path finder, which, given a starting page and goal page, will find the shortest path between the two using only links on Wikipedia.</p>
                   <div class="lead mb-4">
                     <b>View this project on GitHub: </b>
-                    <a href="https://github.com/ewadkins/NeuralModel" target="blank">https://github.com/ewadkins/NeuralModel</a>
-                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=NeuralModel" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
+                    <a href="https://github.com/ewadkins/WebScraper" target="blank">https://github.com/ewadkins/WebScraper</a>
+                    <iframe class="mt-2" src="http://lab.lepture.com/github-cards/card.html?user=ewadkins&repo=WebScraper" frameborder="0" scrolling="0" width="400" style="max-width: 70vw" height="180" allowtransparency="true"></iframe><br>
                   </div>
                   <a class="btn btn-dark btn-l" data-dismiss="modal" href="#">
                     <i class="fa fa-times"></i> Close Project</a>
