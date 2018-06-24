@@ -1,58 +1,87 @@
-/*!
- * Start Bootstrap - Agency Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+(function($) {
+  "use strict"; // Start of use strict
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1000, 'easeInOutExpo'/*'easeInOutQuad'*/);
-        event.preventDefault();
-    });
+  // Smooth scrolling using jQuery easing
+  $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: (target.offset().top - 53)
+        }, 1000, "easeInOutExpo");
+        return false;
+      }
+    }
+  });
     
-    $('html, body').on('mousewheel', function() {
-        $('html, body').stop(); // Stops autoscrolling upon manual scrolling
-    });
+  $('html, body').on('mousewheel', function() {
+    $('html, body').stop(); // Stops autoscrolling upon manual scrolling
+  });
+
+  // Closes responsive menu when a scroll trigger link is clicked
+  $('.js-scroll-trigger').click(function() {
+    $('.navbar-collapse').collapse('hide');
+  });
+
+  // Activate scrollspy to add active class to navbar items on scroll
+  $('body').scrollspy({
+    target: '#mainNav',
+    offset: 56
+  });
+
+  // Collapse Navbar
+  var navbarCollapse = function() {
+    if ($("#mainNav").offset().top > 100) {
+      $("#mainNav").addClass("navbar-shrink");
+    } else {
+      $("#mainNav").removeClass("navbar-shrink");
+    }
+  };
+  // Collapse now if page is not at top
+  navbarCollapse();
+  // Collapse the navbar when page is scrolled
+  $(window).scroll(navbarCollapse);
+
+  // Hide navbar when modals trigger
+  /*$('.portfolio-modal').on('show.bs.modal', function(e) {
+    $(".navbar").addClass("d-none");
+  })
+  $('.portfolio-modal').on('hidden.bs.modal', function(e) {
+    $(".navbar").removeClass("d-none");
+  })*/
     
-    /*window.MutationObserver = window.MutationObserver
-    || window.WebKitMutationObserver
-    || window.MozMutationObserver;
-    var observer = new MutationObserver(function(mutation) {
-        if (mutation[0].target.height !== 'auto') {
-            mutation[0].target.height = 'auto';
-        }
-    });
-    $('iframe[id^="ghcard-ewadkins-"]').each(function() {
-        observer.observe($(this)[0], { attributes: true });
-    });*/
+
+  // Scroll to top button appear
+  $(document).scroll(function() {
+    var scrollDistance = $(this).scrollTop();
+    if (scrollDistance > 100) {
+      $('.scroll-to-top').fadeIn();
+    } else {
+      $('.scroll-to-top').fadeOut();
+    }
+  });
+
     
-    $('.resizableImage').mouseenter(function() {
-        $(this).stop().animate({ width: $(this).attr('width') * 1.1, height: $(this).attr('height') * 1.1 });
-    });
+  var triggeredFunction = function() {
+    var s = document.createElement("script");
+    s.setAttribute("src", "https://nthitz.github.io/turndownforwhatjs/tdfw.js");
+    document.body.appendChild(s);
+  };
+  var clickCount = 0;
+  var triggered = false;
+  var timestamp = 0;
+  $('#profile_pic').click(function() {
+    if (new Date().getTime() - timestamp < 500) {
+        clickCount++;
+    } else {
+        clickCount = 1;
+    }
+    timestamp = new Date().getTime();
+    if (clickCount >= 5 && !triggered) {
+      triggered = true;
+      triggeredFunction();
+    }
+  });
 
-    $('.resizableImage').mouseleave(function() {
-        var x = $(this).attr('width'),
-            y = $(this).attr('height');
-
-        $(this).stop().animate({ width: x, height: y });
-    });
-});
-
-// Highlight the top nav as scrolling occurs
-$('body').scrollspy({
-    target: '.navbar-fixed-top'
-})
-
-// Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-    $('.navbar-toggle:visible').click();
-});
-
-function resizeVideo() {
-    $('#video').height($('#header').height() + 'px')
-}
-window.addEventListener('resize', resizeVideo);
+})(jQuery); // End of use strict
