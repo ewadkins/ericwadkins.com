@@ -11,6 +11,7 @@ var config = {
 			appDirectory: __dirname,
 			publicDirectory: 'public',
 			routesDirectory: 'routes',
+			miscDirectory: 'misc',
 			logDirectory: 'logs',
 			index: 'index.html',
 			schedule: 'schedule.html',
