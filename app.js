@@ -124,7 +124,8 @@ function create(db) {
         '^\/a$', // analytics short link
         '^\/map',
         '^\/img/markers',
-        '^\/m$' // map short link
+        '^\/m$', // map short link
+        '^\/ping(\/.*)?' // ping test
     ];
 
 	// Add GeoIP tracker
@@ -366,6 +367,7 @@ function create(db) {
 	app.use('/dashboard/collage', require(path.join(__dirname, config.server.routesDirectory, 'dashboard/collage'))(db, logger));
 	app.use('/dashboard/gas', require(path.join(__dirname, config.server.routesDirectory, 'dashboard/gas'))(db, logger));
 	app.use('/misc', require(path.join(__dirname, config.server.miscDirectory))(db, logger));
+	app.use('/ping', require(path.join(__dirname, config.server.routesDirectory, 'ping'))(db, logger));
 
     app.use('/files', function(req, res, next) {
         if (fs.lstatSync(path.join(__dirname, config.server.publicDirectory, decodeURI(req.url))).isFile()) {
