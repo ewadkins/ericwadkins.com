@@ -1,6 +1,7 @@
 var dns = require('dns');
 var parseDomain = require('parse-domain');
 var geoip = require('geoip-lite');
+var countryLookup = require('country-code-lookup');
 var iso3166 = require('iso-3166-2');
 var whois = require('whois-ux');
 
@@ -68,6 +69,10 @@ function analyze(ip, domain, geo, whoisResults, callback) {
     }
     countryCode = countryObj.code || countryCode; // Refine country code
     country = countryObj.name || null;
+    countryObj = countryLookup.byIso(countryCode || '  ') || {}
+    continent = countryObj.continent || null;
+    subcontinent = countryObj.region || null;
+    countryCapital = countryObj.capital || null;
     regionCode = geo.region || null;
     var regionObj = {};
     if (regionCode && countryCode) {
@@ -76,6 +81,7 @@ function analyze(ip, domain, geo, whoisResults, callback) {
     regionCode = regionObj.regionCode || regionCode; // Refine region code
     region = regionObj.name || null;
     regionType = regionObj.type ? regionObj.type.toLowerCase() : null;
+    metroCode = geo.metro || null;
     city = geo.city || null;
     range = geo.range || null;
     if (range && range.length === 2) {
@@ -97,6 +103,9 @@ function analyze(ip, domain, geo, whoisResults, callback) {
         regionType: regionType,
         city: city,
         latLong: latLong,
+        continent: continent,
+        subcontinent: subcontinent,
+        countryCapital: countryCapital,
         range: range
     });
 }
@@ -111,6 +120,7 @@ function geoLookup(ip, callback) {
                 geo = geoip.lookup(ip);
             }
         }
+        
         callback(geo);
     }
     else {
