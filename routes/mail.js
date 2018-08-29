@@ -113,6 +113,8 @@ module.exports = function(db, logger){
                 var city = data.city;
                 var latLong = data.latLong;
                 var range = data.range;
+                var continent = data.continent;
+                var subcontinent = data.subcontinent;
 
                 wiki((entity || '').toLowerCase(), function(description) {
                     description = description || '<i>No description found</i>';
@@ -167,7 +169,11 @@ module.exports = function(db, logger){
                             + (regionStr || unknown) + '</td></tr>'
                             + '<tr><td ' + styleAttr + '><b> City </b></td><td>'
                             + (city || unknown) + '</td></tr>'
-                            + '<tr><td ' + styleAttr + '><b> Lat./Long. </b></td><td><a href="http://maps.google.com/?q=' + latLong + '">'+ latLong + '</a></td></tr>';
+                            + '<tr><td ' + styleAttr + '><b> Lat./Long. </b></td><td><a href="http://maps.google.com/?q=' + latLong + '">'+ latLong + '</a></td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> Continent </b></td><td>'
+                                + (continent || unknown) + '</td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> Subcontinent </b></td><td>'
+                                + (subcontinent || unknown) + '</td></tr>';
                     }
                     else {
                         message += '<tr><td ' + styleAttr + '><b>GeoIP Lookup</b></td><td><i>Lookup failed</i></td></tr>';

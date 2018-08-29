@@ -197,6 +197,8 @@ function create(db) {
                     var city = data.city;
                     var latLong = data.latLong;
                     var range = data.range;
+                    var continent = data.continent;
+                    var subcontinent = data.subcontinent;
                     
                     wiki((entity || '').toLowerCase(), function(description) {
                         description = description || '<i>No description found</i>';
@@ -251,7 +253,11 @@ function create(db) {
                                 + (regionStr || unknown) + '</td></tr>'
                                 + '<tr><td ' + styleAttr + '><b> City </b></td><td>'
                                 + (city || unknown) + '</td></tr>'
-                                + '<tr><td ' + styleAttr + '><b> Lat./Long. </b></td><td><a href="http://maps.google.com/?q=' + latLong + '">'+ latLong + '</a></td></tr>';
+                                + '<tr><td ' + styleAttr + '><b> Lat./Long. </b></td><td><a href="http://maps.google.com/?q=' + latLong + '">'+ latLong + '</a></td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> Continent </b></td><td>'
+                                + (continent || unknown) + '</td></tr>'
+                                + '<tr><td ' + styleAttr + '><b> Subcontinent </b></td><td>'
+                                + (subcontinent || unknown) + '</td></tr>';
                         }
                         else {
                             message += '<tr><td ' + styleAttr + '><b>GeoIP Lookup</b></td><td><i>Lookup failed</i></td></tr>';
@@ -283,7 +289,9 @@ function create(db) {
                             regionType || '',
                             city || '',
                             latLong || '',
-                            range || ''
+                            range || '',
+                            continent || '',
+                            subcontinent || ''
                         );
                         
                         // Stop sending email notifications for crawlers
@@ -304,7 +312,7 @@ function create(db) {
         next();
     });
     
-    function logToSpreadsheet(dateTime, path, ip, domain, longDomain, entity, crawler, country, countryCode, region, regionCode, regionType, city, latLong, range) {
+    function logToSpreadsheet(dateTime, path, ip, domain, longDomain, entity, crawler, country, countryCode, region, regionCode, regionType, city, latLong, range, continent, subcontinent) {
         // GeoIP Tracker submission function
         var formid = process.env.FORM_ID;
         if (formid) {
@@ -323,7 +331,9 @@ function create(db) {
                 "entry.1705355953": regionType,
                 "entry.169013684": city,
                 "entry.966262772": latLong,
-                "entry.1517919849": range
+                "entry.1517919849": range,
+                "entry.337828394": continent,
+                "entry.1206433010": subcontinent
             };
             var params = [];
             for (key in data) {

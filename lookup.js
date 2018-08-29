@@ -103,10 +103,10 @@ function analyze(ip, domain, geo, whoisResults, callback) {
         regionType: regionType,
         city: city,
         latLong: latLong,
+        range: range,
         continent: continent,
-        subcontinent: subcontinent,
-        countryCapital: countryCapital,
-        range: range
+        subcontinent: subcontinent
+        //countryCapital: countryCapital
     });
 }
 
