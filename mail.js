@@ -8,7 +8,7 @@ var mg = require('nodemailer-mailgun-transport');
 var transporter = nodemailer.createTransport(
     mg({
         auth: {
-            api_key: process.env.MAILGUN_KEY,
+            api_key: process.env.MAILGUN_KEY || '0',
             domain: 'mg.ericwadkins.com'
         }
     })

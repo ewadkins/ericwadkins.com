@@ -81,7 +81,7 @@ function create(db) {
     // Add document builder (works with query or request body)
     app.buildDocument = require('./buildDocument');
     
-    // Add mail functionality (from noreply8345@gmail.com)
+    // Add mail functionality (from ericwadkins.com)
     app.mail = require('./mail');
 
 	// Setup oauth model

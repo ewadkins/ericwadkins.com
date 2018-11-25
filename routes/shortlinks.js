@@ -40,6 +40,38 @@ module.exports = function(db, logger){
 	router.get('/vd', function(req, res, next) {
 		res.redirect('/api/viewdata');
 	});
+
+	router.get('/about', function(req, res, next) {
+		res.redirect('/#about');
+	});
+
+	router.get('/education', function(req, res, next) {
+		res.redirect('/#about');
+	});
+
+	router.get('/skills', function(req, res, next) {
+		res.redirect('/#skills');
+	});
+
+	router.get('/projects', function(req, res, next) {
+		res.redirect('/#projects');
+	});
+
+	router.get('/papers', function(req, res, next) {
+		res.redirect('/#papers');
+	});
+
+	router.get('/timeline', function(req, res, next) {
+		res.redirect('/#timeline');
+	});
+
+	router.get('/experience', function(req, res, next) {
+		res.redirect('/#timeline');
+	});
+
+	router.get('/contact', function(req, res, next) {
+		res.redirect('/#contact');
+	});
 	
 	return router;
 }

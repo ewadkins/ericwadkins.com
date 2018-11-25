@@ -1,7 +1,7 @@
 var config = require('./config');
 var mongodb = require('mongodb');
 var ObjectID = mongodb.ObjectID;
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 module.exports = function(db, logger) {
 	
