@@ -13,6 +13,10 @@ module.exports = function(db, logger){
 		res.redirect('/resume');
 	});
 
+	router.get('/thesis', function(req, res, next) {
+		res.redirect(path.join('/', config.server.thesis));
+	});
+
 	router.get('/p/1', function(req, res, next) {
 		res.redirect(path.join('/', config.server.p1));
 	});
