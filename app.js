@@ -294,8 +294,8 @@ function create(db) {
                             subcontinent || ''
                         );
                         
-                        // Stop sending email notifications for crawlers
-                        if (crawler) return;
+                        // Stop sending email notifications for crawlers and China
+                        if (crawler || countryCode === 'CN') return;
 
                         app.mail('info@ericwadkins.com', (crawler ? '(C) ' : '') + (countryCode ? '[' + countryCode + (countryCode === 'US' && regionCode ? ':' + regionCode : '') + '] ' : '') + 'GeoIP Tracker - ericwadkins.com',
                                  message, true, function(success) {
