@@ -56,7 +56,7 @@ function analyze(ip, domain, geo, whoisResults, callback) {
         .filter(n => n).join('.') : domain;
     entity = whoisResults.OrgName || whoisResults.netname || whoisResults.NetName || null;
     entity = parsed ? (entity ? entity + ' (' + parsed.domain.toUpperCase() + ')' : parsed.domain.toUpperCase()) : null;
-    crawler = /(crawl|spider|bot)[\.-]/.test(longDomain);
+    crawler = /(crawl|spider|bot|amazonaws)[\.-]/.test(longDomain);
 
     // GeoIP lookup
     var country, countryCode, region, regionCode, regionType, city, latLong, range;
